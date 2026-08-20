@@ -20,6 +20,7 @@
 class ParticleEmitter : public GameObject
 {
 	friend class ParticleRenderer;
+	friend class Debugger;
 
 private:
 	static constexpr int PARTICLE_MAX{ 10000 };

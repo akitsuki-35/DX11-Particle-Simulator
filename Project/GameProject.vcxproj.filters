@@ -117,12 +117,6 @@
     <ClCompile Include="sources\02_App\02-1_Scenes\Game.cpp">
       <Filter>02_App\02-1_Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="sources\02_App\02-1_Scenes\Result.cpp">
-      <Filter>02_App\02-1_Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-1_Scenes\Title.cpp">
-      <Filter>02_App\02-1_Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="sources\04_External\include\ImGui\imgui.cpp">
       <Filter>04_External\ImGui</Filter>
     </ClCompile>
@@ -264,36 +258,6 @@
     <ClCompile Include="sources\01_Framework\01-2_Components\AudioPlayer.cpp">
       <Filter>01_Framework\01-2_Components\AudioPlayer</Filter>
     </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\Box.cpp">
-      <Filter>02_App\02-2_Objects\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\Bullet.cpp">
-      <Filter>02_App\02-2_Objects\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\Camera.cpp">
-      <Filter>02_App\02-2_Objects\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\Enemy.cpp">
-      <Filter>02_App\02-2_Objects\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\Field.cpp">
-      <Filter>02_App\02-2_Objects\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\Grass.cpp">
-      <Filter>02_App\02-2_Objects\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\Player.cpp">
-      <Filter>02_App\02-2_Objects\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\Score.cpp">
-      <Filter>02_App\02-2_Objects\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\Sky.cpp">
-      <Filter>02_App\02-2_Objects\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\Tree.cpp">
-      <Filter>02_App\02-2_Objects\Game</Filter>
-    </ClCompile>
     <ClCompile Include="sources\01_Framework\01-1_Common\Shadow.cpp">
       <Filter>02_App\02-2_Objects\Common</Filter>
     </ClCompile>
@@ -311,6 +275,24 @@
     </ClCompile>
     <ClCompile Include="sources\02_App\02-2_Objects\ParticleTypes.cpp">
       <Filter>02_App\02-2_Objects\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-1_Core\SystemTimer.cpp">
+      <Filter>00_Engine\00-1_Core</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\02_App\02-2_Objects\Camera.cpp">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\02_App\02-2_Objects\Field.cpp">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\02_App\02-2_Objects\Sky.cpp">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\02_App\02-2_Objects\Grid.cpp">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\01_Framework\01-2_Components\GridRenderer.cpp">
+      <Filter>01_Framework\01-2_Components\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -356,13 +338,7 @@
     <ClInclude Include="sources\02_App\02-1_Scenes\Game.h">
       <Filter>02_App\02-1_Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="sources\02_App\02-1_Scenes\Result.h">
-      <Filter>02_App\02-1_Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="sources\02_App\02-1_Scenes\Scene.h">
-      <Filter>02_App\02-1_Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-1_Scenes\Title.h">
       <Filter>02_App\02-1_Scenes</Filter>
     </ClInclude>
     <ClInclude Include="sources\04_External\include\ImGui\imconfig.h">
@@ -518,36 +494,6 @@
     <ClInclude Include="sources\01_Framework\01-2_Components\AudioPlayer.h">
       <Filter>01_Framework\01-2_Components\AudioPlayer</Filter>
     </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\Box.h">
-      <Filter>02_App\02-2_Objects\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\Bullet.h">
-      <Filter>02_App\02-2_Objects\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\Camera.h">
-      <Filter>02_App\02-2_Objects\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\Enemy.h">
-      <Filter>02_App\02-2_Objects\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\Field.h">
-      <Filter>02_App\02-2_Objects\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\Grass.h">
-      <Filter>02_App\02-2_Objects\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\Player.h">
-      <Filter>02_App\02-2_Objects\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\Score.h">
-      <Filter>02_App\02-2_Objects\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\Sky.h">
-      <Filter>02_App\02-2_Objects\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\Tree.h">
-      <Filter>02_App\02-2_Objects\Game</Filter>
-    </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\GameObject.h">
       <Filter>02_App\02-2_Objects\Common</Filter>
     </ClInclude>
@@ -568,6 +514,24 @@
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\ParticleTypes.h">
       <Filter>02_App\02-2_Objects\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-1_Core\SystemTimer.h">
+      <Filter>00_Engine\00-1_Core</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\Camera.h">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\Field.h">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\Sky.h">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\Grid.h">
+      <Filter>02_App\02-2_Objects\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\01_Framework\01-2_Components\GridRenderer.h">
+      <Filter>01_Framework\01-2_Components\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

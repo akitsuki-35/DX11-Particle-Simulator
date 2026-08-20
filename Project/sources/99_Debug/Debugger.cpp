@@ -18,6 +18,7 @@
 // デバッグ対象のインクルード
 #include "Scene.h"
 #include "ParticleEmitter.h"
+#include "ParticleRenderer.h"
 #include "ParticleTypes.h"
 #include "BezierCurve.h"
 
@@ -73,6 +74,7 @@ const void Debugger::Update() const
 
 	// ===== デバッグウィンドウの追加処理 =====
 	getInstance().BezierControl();
+	getInstance().ParticleControl();
 }
 
 const void Debugger::Draw() const
@@ -97,7 +99,7 @@ const void Debugger::BezierControl()
 	BezierCurve& bezier = b->GetBezier();
 
 	// ウィンドウ位置固定
-	ImGui::SetNextWindowPos(ImVec2(1000, 0), ImGuiCond_Always);
+	ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Always);
 	// ウィンドウサイズ固定
 	ImGui::SetNextWindowSize(ImVec2(280, 405), ImGuiCond_Always);
 
@@ -118,7 +120,6 @@ const void Debugger::BezierControl()
 	ImGui::SliderFloat("[2].X", &bezier.mControlPoint[2].position.x, -50.0f, 50.0f, "%.2f");
 	ImGui::SliderFloat("[2].Y", &bezier.mControlPoint[2].position.y, -50.0f, 50.0f, "%.2f");
 	ImGui::SliderFloat("[2].Z", &bezier.mControlPoint[2].position.z, -50.0f, 50.0f, "%.2f");
-	ImGui::Separator();
 
 	ImGui::SeparatorText("ControlPoint[3]");
 	ImGui::SliderFloat("[3].X", &bezier.mControlPoint[3].position.x, -50.0f, 50.0f, "%.2f");
@@ -130,44 +131,50 @@ const void Debugger::BezierControl()
 
 const void Debugger::ParticleControl()
 {
-	//ParticleType::Base* type = Scene::GetGameObject<ParticleEmitter>()->GetType();
-	//if (!type) {
-	//	return;
-	//}
+	auto emitter = Scene::GetGameObject<ParticleEmitter>();
+	if (!emitter) {
+		return;
+	}
 
-	//auto* b = dynamic_cast<ParticleType::Bezier*>(type);
+	ParticleType::Base* type = emitter->GetType();
+	if (!type) {
+		return;
+	}
 
-	//if (!b) {
-	//	return;
-	//}
+	auto* b = dynamic_cast<ParticleType::Bezier*>(type);
+	if (!b) {
+		return;
+	}
 
-	//BezierCurve& bezier = b->GetBezier();
+	BezierCurve& bezier = b->GetBezier();
 
-	//double min = 0.005;
-	//double max = 0.1;
+	auto renderer = emitter->GetComponent<ParticleRenderer>();
 
-	//// ウィンドウ位置固定
-	//ImGui::SetNextWindowPos(ImVec2(1000, 405), ImGuiCond_Always);
-	//// ウィンドウサイズ固定
-	//ImGui::SetNextWindowSize(ImVec2(280, 315), ImGuiCond_Always);
+	double min = 0.005;
+	double max = 0.1;
 
-	//ImGui::Begin("Particle", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
-	//ImGui::SeparatorText("Value");
-	//ImGui::SliderInt("Frame", &p->Life, 30, bezier.DEFAULT_FRAMEMAX);
-	//ImGui::SliderInt("Count", &p->Count, 10, 500);
-	//ImGui::SliderScalar("Interval", ImGuiDataType_Double, &p->Interval, &min, &max, "%.3f");
+	// ウィンドウ位置固定
+	ImGui::SetNextWindowPos(ImVec2(0, 405), ImGuiCond_Always);
+	// ウィンドウサイズ固定
+	ImGui::SetNextWindowSize(ImVec2(280, 315), ImGuiCond_Always);
 
-	//ImGui::SeparatorText("MainColor");
-	//ImGui::SliderFloat("MainColor.R", &p->mMainColor.x, 0.02f, 1.00f, "%.3f");
-	//ImGui::SliderFloat("MainColor.G", &p->mMainColor.y, 0.02f, 1.00f, "%.3f");
-	//ImGui::SliderFloat("MainColor.B", &p->mMainColor.z, 0.02f, 1.00f, "%.3f");
+	ImGui::Begin("Particle", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
+	ImGui::SeparatorText("Value");
+	ImGui::SliderInt("Frame", &emitter->mLife, 30, bezier.DEFAULT_FRAMEMAX);
+	ImGui::SliderInt("Count", &emitter->mCount, 10, 500);
+	ImGui::SliderScalar("Interval", ImGuiDataType_Double, &emitter->mMaxInterval, &min, &max, "%.3f");
 
-	//ImGui::SeparatorText("SubColor");
-	//ImGui::SliderFloat("SubColor.R", &p->mSubColor.x, 0.02f, 1.00f, "%.3f");
-	//ImGui::SliderFloat("SubColor.G", &p->mSubColor.y, 0.02f, 1.00f, "%.3f");
-	//ImGui::SliderFloat("SubColor.B", &p->mSubColor.z, 0.02f, 1.00f, "%.3f");
+	ImGui::SeparatorText("MainColor");
+	ImGui::SliderFloat("MainColor.R", &renderer->mColor.x, 0.02f, 1.00f, "%.3f");
+	ImGui::SliderFloat("MainColor.G", &renderer->mColor.y, 0.02f, 1.00f, "%.3f");
+	ImGui::SliderFloat("MainColor.B", &renderer->mColor.z, 0.02f, 1.00f, "%.3f");
 
-	//ImGui::End();
+	ImGui::SeparatorText("SubColor");
+	ImGui::SliderFloat("SubColor.R", &renderer->mSubColor.x, 0.02f, 1.00f, "%.3f");
+	ImGui::SliderFloat("SubColor.G", &renderer->mSubColor.y, 0.02f, 1.00f, "%.3f");
+	ImGui::SliderFloat("SubColor.B", &renderer->mSubColor.z, 0.02f, 1.00f, "%.3f");
+
+	ImGui::End();
 }
 
 #endif

@@ -1,34 +1,23 @@
 ﻿/*============================================================
-*	@file	 : Player.h
-*	@brief	 : プレイヤークラス
+*	@file	 : Grid.h
+*	@brief	 : グリッド
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
-* 　@date	 : 2026/05/19
-*	@updated : 2026/08/04
+* 　@date	 : 2026/08/20
+*	@updated : 2026/08/20
 *============================================================*/
 #pragma once
 
 #include "GameObject.h"
 
-class AudioPlayer;
-
 /*============================================================
-*	@class	: Player
-*	@brief	: プレイヤー
+*	@class	: Grid
+*	@brief	: グリッド
 *============================================================*/
-class Player : public GameObject
+class Grid : public GameObject
 {
-private:
-	Vector3 mVelocity{ 0.0f, 0.0f, 0.0f };
-	Vector3 mAccel{ 0.0f, 0.0f, 0.0f };
-	float mRotationVel{ 0.0f };
-	bool mGround{ true };
-	float mMoveAnimation{ 0.0f };
-
-	AudioPlayer* mSE{};
-
 public:
-	Player() = default;
+	Grid() = default;
 
 	void Initialize() override;
 	void Finalize() override;

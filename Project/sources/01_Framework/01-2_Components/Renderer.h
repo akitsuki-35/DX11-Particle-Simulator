@@ -34,6 +34,7 @@ enum class Blend : uint8_t
 // 描画レイヤー
 enum class Layer : uint8_t
 {
+	Grid,
 	World,
 	Alpha,
 	UI,

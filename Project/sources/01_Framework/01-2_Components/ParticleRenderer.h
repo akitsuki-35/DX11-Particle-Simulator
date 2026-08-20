@@ -23,6 +23,7 @@ class Texture;
 class ParticleRenderer : public Renderer
 {
 	friend class ParticleEmitter;
+	friend class Debugger;
 
 private:
 	// エミッタ
@@ -30,6 +31,9 @@ private:
 
 	// テクスチャ
 	Texture* _mTexture{ nullptr };
+
+	// サブカラー
+	DirectX::XMFLOAT4 mSubColor{ 1.0f, 1.0f, 1.0f, 1.0f };
 
 public:
 	ParticleRenderer(GameObject* owner)
@@ -57,6 +61,9 @@ public:
 private:
 	// ワールド行列取得
 	DirectX::XMMATRIX getWorldMatrix() const override;
+
+	void mainColorDraw(const DirectX::XMMATRIX& rotation) const;
+	void subColorDraw(const DirectX::XMMATRIX& rotation) const;
 
 public:
 	// テクスチャ読み込み

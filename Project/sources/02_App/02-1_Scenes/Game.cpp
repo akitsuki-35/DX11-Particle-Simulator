@@ -13,18 +13,10 @@
 #include "Transition.h"
 
 #include "Field.h"
-#include "Player.h"
-#include "Enemy.h"
-#include "Bullet.h"
-#include "Tree.h"
 #include "Sky.h"
-#include "Box.h"
-#include "Shadow.h"
 
 #include "ParticleEmitter.h"
-#include "Result.h"
-
-#include "Score.h"
+#include "Grid.h"
 
 #include "DeviceManager.h"
 #include "D3D11Config.h"
@@ -36,26 +28,11 @@ void Game::Initialize()
 	_mGameObjects.clear();
 
 	AddGameObject<Camera>();
+	AddGameObject<Grid>()->SetPosition({ 0.0f, 0.0f, 0.0f });
 
-	AddGameObject<Sky>();
-
-	AddGameObject<Field>();
-	AddGameObject<Player>();
-	AddGameObject<Enemy>()->SetPosition({ 5.0f, 0.0f, 5.0f });
-	AddGameObject<Enemy>()->SetPosition({ -5.0f, 0.0f, 5.0f });
-	AddGameObject<Enemy>()->SetPosition({ 0.0f, 0.0f, 5.0f });
-	Box* box = AddGameObject<Box>();
-	box->SetPosition({ 0.0f, 0.0f, -5.0f });
-	box->SetScale({ 1.0f, 1.0f, 1.0f });
-
-	AddGameObject<Tree>()->SetPosition({ -5.0f,0.0f, 5.0f });
-	AddGameObject<Tree>()->SetPosition({ -5.0f,0.0f, 0.0f });
-
-	AddGameObject<Shadow>()->SetPosition({ 0.0f, 0.1f, 0.0f });
+	//AddGameObject<Sky>();
 
 	AddGameObject<ParticleEmitter>()->SetPosition({ 0.0f, 0.0f, 0.0f });
-
-	AddGameObject<Score>();
 }
 
 void Game::Finalize()
@@ -66,10 +43,6 @@ void Game::Finalize()
 void Game::Update(double deltaTime)
 {
 	Scene::Update(deltaTime);
-
-	if (Input::GetKeyTrigger(VK_RETURN)) {
-		SceneManager::getInstance().SceneChange<Result>();
-	}
 }
 
 void Game::Draw() const

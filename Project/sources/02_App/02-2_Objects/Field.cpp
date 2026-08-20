@@ -9,8 +9,7 @@
 #include "Field.h"
 #include "SpriteRenderer.h"
 #include "MeshTypes.h"
-#include "AudioPlayer.h"
-#include "input.h"
+#include "Input.h"
 
 using namespace MeshType;
 
@@ -22,10 +21,6 @@ void Field::Initialize()
 	mTransform.SetScale({ 30.0f, 30.0f, 30.0f });
 
 	renderer->LoadTexture("assets\\textures\\glass.jpg")->LoadShader("Unlit");
-
-	AudioPlayer* bgm = AddComponent<AudioPlayer>(this)->LoadAudio("assets\\audio\\tukito_break_out_in_the_middle.ogg");
-	bgm->SetVolume(0.1f);
-	bgm->Play(true);
 }
 
 void Field::Finalize()
@@ -35,17 +30,6 @@ void Field::Finalize()
 
 void Field::Update(double deltaTime)
 {
-	if (Input::GetKeyTrigger('Z')) {
-		GameObject::GetComponent<AudioPlayer>()->Pause();
-	}
-	if (Input::GetKeyTrigger('X')) {
-		GameObject::GetComponent<AudioPlayer>()->Resume();
-	}
-	if (Input::GetKeyTrigger('C')) {
-		GameObject::GetComponent<AudioPlayer>()->Stop();
-	}
-
-
 	GameObject::Update(deltaTime);
 }
 

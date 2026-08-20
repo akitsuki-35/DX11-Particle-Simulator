@@ -19,6 +19,7 @@ class Camera : public GameObject
 {
 protected:
 	Vector3 mTarget{}; // 注視点
+	float mDistance{ 50.0f }; // ターゲットまでの距離
 	DirectX::XMMATRIX mViewMatrix{}; // ビュー行列
 
 public:
