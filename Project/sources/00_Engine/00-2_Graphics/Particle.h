@@ -35,7 +35,6 @@ private:
 
 	bool mEnable{ false };
 	int mLife{ 0 };
-	int mMaxLife{ 0 };
 
 public:
 	Particle();

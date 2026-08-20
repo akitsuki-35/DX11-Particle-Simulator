@@ -25,7 +25,13 @@ private:
 	static constexpr int PARTICLE_MAX{ 10000 };
 	std::vector<Particle> mParticles{};
 	int mCount{ 100 }; // 一度あたりの発射数
+
+	// 全体フレーム
 	int mLife{ 60 };
+
+	// 発射インターバル
+	double mMaxInterval{ 0.1 };
+	double mCurrentInterval{};
 
 	std::unique_ptr<ParticleType::Base> _mType{};
 
@@ -38,6 +44,7 @@ public:
 	void Draw() const override;
 
 	// ゲッター
+	ParticleType::Base* GetType() const { return _mType.get(); }
 	int GetParticleMax() const { return PARTICLE_MAX; }
 	std::vector<Particle>& GetParticles() { return mParticles; }
 	int GetCount() const { return mCount; }

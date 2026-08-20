@@ -67,5 +67,7 @@ namespace ParticleType {
 		void Update(double deltaTime) override;
 
 		void Emission() override;
+
+		BezierCurve& GetBezier() { return mBezier; }
 	};
 }

@@ -105,9 +105,6 @@
     <ClCompile Include="sources\00_Engine\00-1_Core\Main.cpp">
       <Filter>00_Engine\00-1_Core</Filter>
     </ClCompile>
-    <ClCompile Include="sources\00_Engine\00-1_Core\Systemtimer.cpp">
-      <Filter>00_Engine\00-1_Core</Filter>
-    </ClCompile>
     <ClCompile Include="sources\00_Engine\00-1_Core\SystemWindow.cpp">
       <Filter>00_Engine\00-1_Core</Filter>
     </ClCompile>
@@ -321,9 +318,6 @@
       <Filter>00_Engine\00-1_Core</Filter>
     </ClInclude>
     <ClInclude Include="sources\00_Engine\00-1_Core\Config.h">
-      <Filter>00_Engine\00-1_Core</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-1_Core\Systemtimer.h">
       <Filter>00_Engine\00-1_Core</Filter>
     </ClInclude>
     <ClInclude Include="sources\00_Engine\00-1_Core\SystemWindow.h">

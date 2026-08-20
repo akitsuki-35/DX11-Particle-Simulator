@@ -27,7 +27,7 @@ private:
 	~Debugger() {};
 
 public:
-	static Debugger& GetInstance() {
+	static Debugger& getInstance() {
 		static Debugger instance;
 		return instance;
 	}

@@ -14,6 +14,7 @@
 #include "Title.h"
 #include "Scene.h"
 #include "AudioPlayer.h"
+#include "Debugger.h"
 
 /*------------------------------------------------------------
 	初期化
@@ -76,6 +77,10 @@ void SceneManager::Update(double deltaTime)
 		mCurrentScene->Initialize();
 	}
 
+#ifndef NDEBUG
+	Debugger::getInstance().Update();
+#endif
+
 }
 
 /*------------------------------------------------------------
@@ -88,6 +93,10 @@ void SceneManager::Draw()
 	if(mCurrentScene) mCurrentScene->Draw();
 
 	Transition::getInstance().Draw();
+
+#ifndef NDEBUG
+	Debugger::getInstance().Draw();
+#endif
 
 	D3D11::Graphics::getInstance().End();
 }

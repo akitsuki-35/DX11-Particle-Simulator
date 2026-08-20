@@ -20,8 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\00_Engine\00-1_Core\Application.cpp" />
-    <ClCompile Include="sources\00_Engine\00-1_Core\Main.cpp" />
-    <ClCompile Include="sources\00_Engine\00-1_Core\Systemtimer.cpp" />
+    <ClCompile Include="sources\00_Engine\00-1_Core\Main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="sources\00_Engine\00-1_Core\SystemWindow.cpp" />
     <ClCompile Include="sources\00_Engine\00-1_Core\Utility.cpp" />
     <ClCompile Include="sources\00_Engine\00-2_Graphics\BufferManager.cpp" />
@@ -160,8 +162,8 @@
     <ClCompile Include="sources\99_Debug\Debugger.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="sources\99_Debug\DebugOstream.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -179,7 +181,6 @@
   <ItemGroup>
     <ClInclude Include="sources\00_Engine\00-1_Core\Application.h" />
     <ClInclude Include="sources\00_Engine\00-1_Core\Config.h" />
-    <ClInclude Include="sources\00_Engine\00-1_Core\Systemtimer.h" />
     <ClInclude Include="sources\00_Engine\00-1_Core\SystemWindow.h" />
     <ClInclude Include="sources\00_Engine\00-1_Core\Docs.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -348,8 +349,8 @@
     <ClInclude Include="sources\99_Debug\Debugger.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="sources\99_Debug\DebugMemoryleak.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>

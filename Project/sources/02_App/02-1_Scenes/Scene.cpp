@@ -99,4 +99,6 @@ void Scene::Draw() const
 			obj->Draw();
 		}
 	}
+
+	D3D11::DeviceManager::getInstance().SetDepthStencilState(D3D11::RenderState::Depth::Enable);
 }
