@@ -25,6 +25,7 @@ private:
 	static constexpr int PARTICLE_MAX{ 10000 };
 	std::vector<Particle> mParticles{};
 	int mCount{ 100 }; // 一度あたりの発射数
+	int mLife{ 60 };
 
 	std::unique_ptr<ParticleType::Base> _mType{};
 
@@ -40,4 +41,5 @@ public:
 	int GetParticleMax() const { return PARTICLE_MAX; }
 	std::vector<Particle>& GetParticles() { return mParticles; }
 	int GetCount() const { return mCount; }
+	int GetLife() const { return mLife; }
 };

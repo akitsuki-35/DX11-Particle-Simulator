@@ -37,20 +37,24 @@ private:
 	int mLife{ 0 };
 	int mMaxLife{ 0 };
 
-	void update(double deltaTime);
-
 public:
 	Particle();
 
-	void Initialize(const Vector3& position, const Vector3& velocity, const Vector3& scale, int life = 60) {
+	// 更新
+	void Update(double deltaTime);
+
+	// パラメータのセット
+	void SetParameter(const Vector3& position, const Vector3& velocity, const Vector3& scale, int life = 60) {
 		mPosition = position;
 		mVelocity = velocity;
 		mScale = scale;
 		mLife = life;
 	}
 
+	// 有効・無効切り替え
 	void Enable() { mEnable = true; }
 	void Disable() { mEnable = false; }
 
+	// 有効・無効状態取得
 	bool IsEnable() const { return mEnable; }
 };

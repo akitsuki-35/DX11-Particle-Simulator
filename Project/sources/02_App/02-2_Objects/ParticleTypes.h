@@ -8,6 +8,8 @@
 *============================================================*/
 #pragma once
 
+#include "BezierCurve.h"
+
 /*------------------------------------------------------------
 	前方宣言
 ------------------------------------------------------------*/
@@ -28,6 +30,8 @@ namespace ParticleType {
 		ParticleEmitter* _mEmitter{};
 
 	public:
+		Base(ParticleEmitter* emitter) 
+			:_mEmitter(emitter) {}
 		virtual ~Base() = default;
 
 		virtual void Emission() = 0;
@@ -41,6 +45,27 @@ namespace ParticleType {
 	class Box : public Base
 	{
 	public:
+		Box(ParticleEmitter* emitter)
+			: Base(emitter) {}
+
+		void Emission() override;
+	};
+
+	/*============================================================
+	*	@class	: Particle::Bezier
+	*	@brief	: ベジエ曲線上を移動するパーティクル
+	*============================================================*/
+	class Bezier : public Base
+	{
+	private:
+		BezierCurve mBezier{};
+
+	public:
+		Bezier(ParticleEmitter* emitter)
+			: Base(emitter) {}
+
+		void Update(double deltaTime) override;
+
 		void Emission() override;
 	};
 }

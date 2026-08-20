@@ -16,7 +16,7 @@ Particle::Particle()
 	mMesh.CreatePlane(Plane::Pivot::Center, Plane::Axis::XY);
 }
 
-void Particle::update(double deltaTime)
+void Particle::Update(double deltaTime)
 {
 	float dt = static_cast<float>(deltaTime);
 

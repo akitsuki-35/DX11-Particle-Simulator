@@ -1,4 +1,4 @@
-/*============================================================
+﻿/*============================================================
 *	@file	 : BezierCurve.h
 *	@brief	 : ベジエ曲線
 *
@@ -20,6 +20,7 @@ class BezierCurve
 {
 	// Debuggerから操作可能にする
 	friend Debugger;
+
 private:
 	struct POINT {
 		Vector3 position{};

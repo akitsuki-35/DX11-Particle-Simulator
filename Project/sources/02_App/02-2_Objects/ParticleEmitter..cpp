@@ -27,7 +27,7 @@ void ParticleEmitter::Initialize()
 		mParticles[i].mEnable = false;
 	}
 
-	_mType = std::make_unique<ParticleType::Box>();
+	_mType = std::make_unique<ParticleType::Bezier>(this);
 
 	mCount = 100;
 }
@@ -44,10 +44,7 @@ void ParticleEmitter::Update(double deltaTime)
 		_mType->Emission();
 	}
 
-	// パーティクル更新
-	for (int i = 0; i < PARTICLE_MAX; i++) {
-		mParticles[i].update(deltaTime);
-	}
+	_mType->Update(deltaTime);
 }
 
 void ParticleEmitter::Draw() const
