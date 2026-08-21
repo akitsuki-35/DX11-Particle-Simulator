@@ -10,6 +10,7 @@
 
 #include "Vector3.h"
 #include "Debugger.h"
+#include <array>
 #include <vector>
 
 /*============================================================
@@ -32,7 +33,7 @@ private:
 	int mFrameMax{}; // 全体フレーム
 	int mFrame{}; // 現在フレーム
 
-	POINT mControlPoint[4]{}; // 制御点(三次ベジエ曲線)
+	std::array<POINT, 4> mControlPoint{}; // 制御点(三次ベジエ曲線)
 	std::vector<POINT> mBezierPoint; // フレームごとのベジエ曲線上座標
 
 public:

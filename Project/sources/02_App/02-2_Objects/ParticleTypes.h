@@ -24,29 +24,30 @@ namespace ParticleType {
 	*	@class	: Particle::Base
 	*	@brief	: パーティクル形状基底クラス
 	*============================================================*/
-	class Base
+	class Type
 	{
 	protected:
 		ParticleEmitter* _mEmitter{};
 
 	public:
-		Base(ParticleEmitter* emitter) 
+		Type(ParticleEmitter* emitter) 
 			:_mEmitter(emitter) {}
-		virtual ~Base() = default;
+		virtual ~Type() = default;
 
 		virtual void Emission() = 0;
 		virtual void Update(double deltaTime);
+		virtual Type* LoadCSV(const char* filePath);
 	};
 
 	/*============================================================
 	*	@class	: Particle::Box
 	*	@brief	: ボックス型パーティクル
 	*============================================================*/
-	class Box : public Base
+	class Box : public Type
 	{
 	public:
 		Box(ParticleEmitter* emitter)
-			: Base(emitter) {}
+			: Type(emitter) {}
 
 		void Emission() override;
 	};
@@ -55,14 +56,14 @@ namespace ParticleType {
 	*	@class	: Particle::Bezier
 	*	@brief	: ベジエ曲線上を移動するパーティクル
 	*============================================================*/
-	class Bezier : public Base
+	class Bezier : public Type
 	{
 	private:
 		BezierCurve mBezier{};
 
 	public:
 		Bezier(ParticleEmitter* emitter)
-			: Base(emitter) {}
+			: Type(emitter) {}
 
 		void Update(double deltaTime) override;
 

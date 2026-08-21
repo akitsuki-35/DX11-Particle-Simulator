@@ -27,9 +27,11 @@ void ParticleEmitter::Initialize()
 		mParticles[i].mEnable = false;
 	}
 
-	_mType = std::make_unique<ParticleType::Bezier>(this);
+	_mType = std::make_unique<ParticleType::Box>(this);
+	
+	_mType->LoadCSV("assets\\csv\\test2.csv");
 
-	mCount = 100;
+	//mCount = 100;
 }
 
 void ParticleEmitter::Finalize()

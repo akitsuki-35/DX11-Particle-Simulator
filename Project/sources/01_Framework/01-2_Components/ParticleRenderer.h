@@ -71,4 +71,7 @@ public:
 	// ゲッター
 	Mesh& GetMesh() { return mMesh; }
 	Texture* GetTexture() const { return _mTexture; }
+
+	// カラーのセット
+	void SetSubColor(const DirectX::XMFLOAT4& color) { mSubColor = color; }
 };

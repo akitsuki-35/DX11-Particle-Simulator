@@ -8,13 +8,74 @@
 *============================================================*/
 #include "ParticleTypes.h"
 #include "ParticleEmitter.h"
+#include "ParticleRenderer.h"
+#include "CSVHandler.h"
 
-void ParticleType::Base::Update(double deltaTime)
+using namespace DirectX;
+
+void ParticleType::Type::Update(double deltaTime)
 {
 	auto& particles = _mEmitter->GetParticles();
 	for (int i = 0; i < _mEmitter->GetParticleMax(); i++) {
 		particles[i].Update(deltaTime);
 	}
+}
+
+ParticleType::Type* ParticleType::Type::LoadCSV(const char* filePath)
+{
+	CSVHandler::Data data{};
+
+	// ロード失敗時はreturn
+	if (!CSVHandler::Load(filePath, data)) {
+		return this;
+	}
+
+	for (const auto& row : data){
+		std::string tag = CSVHandler::GetString(row, 0);
+
+		if (tag == "Type") {
+
+		}
+		else if(tag == "LIFE") {
+			// 全体フレーム取得
+			int life = CSVHandler::GetInt(row, 1, 60);
+			_mEmitter->SetLife(life);
+		}
+		else if (tag == "INTERVAL") {
+			// インターバル取得
+			double interval = CSVHandler::GetDouble(row, 1, 0.1);
+			_mEmitter->SetInterval(interval);
+		}
+		else if (tag == "COUNT") {
+			// 発射数取得
+			double count = CSVHandler::GetInt(row, 1, 100);
+			_mEmitter->SetCount(count);
+		}
+		else if (tag == "MAINCOLOR") {
+			// メインカラー取得
+			XMFLOAT4 color{};
+
+			color.x = CSVHandler::GetFloat(row, 1, 1.0f);
+			color.y = CSVHandler::GetFloat(row, 2, 1.0f);
+			color.z = CSVHandler::GetFloat(row, 3, 1.0f);
+			color.w = CSVHandler::GetFloat(row, 4, 1.0f);
+
+			_mEmitter->GetComponent<ParticleRenderer>()->SetColor(color);
+		}
+		else if (tag == "SUBCOLOR") {
+			// サブカラー取得
+			XMFLOAT4 color{};
+
+			color.x = CSVHandler::GetFloat(row, 1, 1.0f);
+			color.y = CSVHandler::GetFloat(row, 2, 1.0f);
+			color.z = CSVHandler::GetFloat(row, 3, 1.0f);
+			color.w = CSVHandler::GetFloat(row, 4, 1.0f);
+
+			_mEmitter->GetComponent<ParticleRenderer>()->SetSubColor(color);
+		}
+	}
+
+	return this;
 }
 
 void ParticleType::Box::Emission()
@@ -49,7 +110,7 @@ void ParticleType::Bezier::Update(double deltaTime)
 	mBezier.Update();
 	_mEmitter->SetPosition(mBezier.GetBezierPoint(mBezier.GetFrame()));
 
-	Base::Update(deltaTime);
+	Type::Update(deltaTime);
 }
 
 void ParticleType::Bezier::Emission()

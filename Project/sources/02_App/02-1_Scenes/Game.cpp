@@ -23,14 +23,14 @@
 
 void Game::Initialize()
 {
-	Transition::getInstance().Start(1.0, true);
+	//Transition::getInstance().Start(1.0, true);
 
 	_mGameObjects.clear();
 
 	AddGameObject<Camera>();
 	AddGameObject<Grid>()->SetPosition({ 0.0f, 0.0f, 0.0f });
 
-	//AddGameObject<Sky>();
+	AddGameObject<Sky>();
 
 	AddGameObject<ParticleEmitter>()->SetPosition({ 0.0f, 0.0f, 0.0f });
 }

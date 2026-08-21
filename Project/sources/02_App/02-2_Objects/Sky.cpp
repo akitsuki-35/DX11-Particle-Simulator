@@ -16,14 +16,14 @@ void Sky::Initialize()
 	mTransform = Transform(
 		{ 0.0f, 0.0f, 0.0f },
 		{ 0.0f, 0.0f, 0.0f },
-		{ 100.0f, 100.0f, 100.0f }
+		{ 300.0f, 300.0f, 300.0f }
 	);
 
 	mVelocity = { 0.0f, 0.0f, 0.0f };
 	mAccel = { 0.0f, 0.0f, 0.0f };
 
 	// コンポーネント読込
-	AddComponent<ModelRenderer>(this)->LoadModel("assets\\models\\sky.obj")->LoadShader("Unlit");
+	AddComponent<ModelRenderer>(this)->LoadModel("assets\\models\\sky.obj")->LoadShader("Unlit")->SetLayer(Layer::BackGround);
 }
 
 void Sky::Finalize()

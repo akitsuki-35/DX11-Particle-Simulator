@@ -85,7 +85,7 @@ const void Debugger::Draw() const
 
 const void Debugger::bezierControl()
 {
-	ParticleType::Base* type = Scene::GetGameObject<ParticleEmitter>()->GetType();
+	ParticleType::Type* type = Scene::GetGameObject<ParticleEmitter>()->GetType();
 	if (!type) {
 		return;
 	}
@@ -136,17 +136,10 @@ const void Debugger::particleControl()
 		return;
 	}
 
-	ParticleType::Base* type = emitter->GetType();
+	ParticleType::Type* type = emitter->GetType();
 	if (!type) {
 		return;
 	}
-
-	auto* b = dynamic_cast<ParticleType::Bezier*>(type);
-	if (!b) {
-		return;
-	}
-
-	BezierCurve& bezier = b->GetBezier();
 
 	auto renderer = emitter->GetComponent<ParticleRenderer>();
 
@@ -160,7 +153,7 @@ const void Debugger::particleControl()
 
 	ImGui::Begin("Particle", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
 	ImGui::SeparatorText("Value");
-	ImGui::SliderInt("Frame", &emitter->mLife, 30, bezier.DEFAULT_FRAMEMAX);
+	ImGui::SliderInt("Frame", &emitter->mLife, 30, 60);
 	ImGui::SliderInt("Count", &emitter->mCount, 10, 100);
 	ImGui::SliderScalar("Interval", ImGuiDataType_Double, &emitter->mMaxInterval, &min, &max, "%.3f");
 

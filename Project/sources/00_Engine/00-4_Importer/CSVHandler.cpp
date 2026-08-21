@@ -1,4 +1,4 @@
-/*============================================================
+﻿/*============================================================
 *	@file	 : CSVHandler.cpp
 *	@brief	 : CSVファイル読み込み・書き出し
 *
@@ -9,6 +9,7 @@
 #include "CSVHandler.h"
 #include "Utility.h"
 #include <sstream>
+#include <fstream>
 
 bool CSVHandler::Load(const char* filePath, Data& data)
 {
@@ -28,7 +29,7 @@ bool CSVHandler::Load(const char* filePath, Data& data)
     while (std::getline(stream, line)) {
         line = trim(line);
 
-        // 空行やデバッグ用のコメント行（#始まり）はスキップ
+        // 空行・コメント行をスキップ
         if (line.empty() || line == "#") {
             continue;
         }
@@ -52,6 +53,32 @@ bool CSVHandler::Load(const char* filePath, Data& data)
 
 bool CSVHandler::Export(const char* filePath, const Data& data)
 {
+    std::ofstream file(filePath);
+    if (!file.is_open()) {
+        // 保存先ディレクトリが存在しない場合はreturn
+        return false;
+    }
+
+    // 2次元配列のデータをファイルに書き込み
+    for (const auto& row : data)
+    {
+        for (size_t i = 0; i < row.size(); ++i)
+        {
+            file << row[i];
+
+            // 行末セル以外に区切り文字としてカンマを挿入
+            if (i < row.size() - 1)
+            {
+                file << ",";
+            }
+        }
+
+        // 行末で改行
+        file << "\n"; 
+    }
+
+    file.close();
+
     return false;
 }
 
@@ -64,6 +91,23 @@ std::string CSVHandler::GetString(const Row& row, size_t index, const std::strin
     }
 
     return row[index];
+}
+
+int CSVHandler::GetInt(const Row& row, size_t index, int defaultValue)
+{
+    // インデックス範囲とデータチェック
+    if (index >= row.size() || row[index].empty()) {
+        // 範囲外または空文字の場合はデフォルト値を返す
+        return defaultValue;
+    }
+
+    const std::string& str = row[index];
+    int value = 0;
+
+    auto [ptr, ec] = std::from_chars(str.data(), str.data() + str.size(), value);
+
+    // 不正な値の場合はデフォルト値を返す
+    return (ec == std::errc{}) ? value : defaultValue;
 }
 
 float CSVHandler::GetFloat(const Row& row, size_t index, float defaultValue)
@@ -83,7 +127,7 @@ float CSVHandler::GetFloat(const Row& row, size_t index, float defaultValue)
     return (ec == std::errc{}) ? value : defaultValue;
 }
 
-int CSVHandler::GetInt(const Row& row, size_t index, int defaultValue)
+double CSVHandler::GetDouble(const Row& row, size_t index, double defaultValue)
 {
     // インデックス範囲とデータチェック
     if (index >= row.size() || row[index].empty()) {
@@ -92,7 +136,7 @@ int CSVHandler::GetInt(const Row& row, size_t index, int defaultValue)
     }
 
     const std::string& str = row[index];
-    int value = 0;
+    double value = 0.0;
 
     auto [ptr, ec] = std::from_chars(str.data(), str.data() + str.size(), value);
 
