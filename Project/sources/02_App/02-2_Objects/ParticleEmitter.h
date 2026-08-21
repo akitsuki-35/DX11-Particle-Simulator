@@ -54,7 +54,11 @@ public:
 	int GetLife() const { return mLife; }
 
 	// セッター
-	void SetLife(int life) { mLife = life; }
-	void SetInterval(double interval) { mMaxInterval = mCurrentInterval = interval; }
-	void SetCount(int count) { mCount = count; }
+	void SetLife(const int& life) { mLife = life; }
+	void SetInterval(const double& interval) { mMaxInterval = mCurrentInterval = interval; }
+	void SetCount(const int& count) { mCount = count; }
+	void SetType(ParticleType::Type* type) { _mType.reset(std::move(type)); }
+
+	// CSVファイル読み込み
+	ParticleEmitter* LoadCSV(const char* filePath);
 };

@@ -28,10 +28,6 @@ void ParticleEmitter::Initialize()
 	}
 
 	_mType = std::make_unique<ParticleType::Box>(this);
-	
-	_mType->LoadCSV("assets\\csv\\test2.csv");
-
-	//mCount = 100;
 }
 
 void ParticleEmitter::Finalize()
@@ -54,4 +50,10 @@ void ParticleEmitter::Update(double deltaTime)
 void ParticleEmitter::Draw() const
 {
 	GameObject::Draw();
+}
+
+ParticleEmitter* ParticleEmitter::LoadCSV(const char* filePath)
+{
+	_mType->LoadCSV(filePath);
+	return this;
 }

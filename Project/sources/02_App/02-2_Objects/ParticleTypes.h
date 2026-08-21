@@ -9,6 +9,8 @@
 #pragma once
 
 #include "BezierCurve.h"
+#include <string>
+#include <string_view>
 
 /*------------------------------------------------------------
 	前方宣言
@@ -36,7 +38,10 @@ namespace ParticleType {
 
 		virtual void Emission() = 0;
 		virtual void Update(double deltaTime);
+
+		// CSVファイル読み込み・書き出し
 		virtual Type* LoadCSV(const char* filePath);
+		virtual std::string_view GetTypeName() const = 0;
 	};
 
 	/*============================================================
@@ -50,6 +55,8 @@ namespace ParticleType {
 			: Type(emitter) {}
 
 		void Emission() override;
+
+		std::string_view GetTypeName() const override { return "Box"; };
 	};
 
 	/*============================================================
@@ -70,5 +77,7 @@ namespace ParticleType {
 		void Emission() override;
 
 		BezierCurve& GetBezier() { return mBezier; }
+
+		std::string_view GetTypeName() const override { return "Bezier"; };
 	};
 }

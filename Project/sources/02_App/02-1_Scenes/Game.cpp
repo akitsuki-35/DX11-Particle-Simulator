@@ -32,7 +32,7 @@ void Game::Initialize()
 
 	AddGameObject<Sky>();
 
-	AddGameObject<ParticleEmitter>()->SetPosition({ 0.0f, 0.0f, 0.0f });
+	AddGameObject<ParticleEmitter>()->LoadCSV("assets\\csv\\test2.csv")->SetPosition({ 0.0f, 0.0f, 0.0f });
 }
 
 void Game::Finalize()

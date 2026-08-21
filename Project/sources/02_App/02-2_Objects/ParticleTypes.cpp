@@ -33,10 +33,7 @@ ParticleType::Type* ParticleType::Type::LoadCSV(const char* filePath)
 	for (const auto& row : data){
 		std::string tag = CSVHandler::GetString(row, 0);
 
-		if (tag == "Type") {
-
-		}
-		else if(tag == "LIFE") {
+		if(tag == "LIFE") {
 			// 全体フレーム取得
 			int life = CSVHandler::GetInt(row, 1, 60);
 			_mEmitter->SetLife(life);
@@ -48,7 +45,7 @@ ParticleType::Type* ParticleType::Type::LoadCSV(const char* filePath)
 		}
 		else if (tag == "COUNT") {
 			// 発射数取得
-			double count = CSVHandler::GetInt(row, 1, 100);
+			int count = CSVHandler::GetInt(row, 1, 100);
 			_mEmitter->SetCount(count);
 		}
 		else if (tag == "MAINCOLOR") {
