@@ -73,8 +73,8 @@ const void Debugger::Update() const
 	ImGui::NewFrame();
 
 	// ===== デバッグウィンドウの追加処理 =====
-	getInstance().BezierControl();
-	getInstance().ParticleControl();
+	getInstance().bezierControl();
+	getInstance().particleControl();
 }
 
 const void Debugger::Draw() const
@@ -83,7 +83,7 @@ const void Debugger::Draw() const
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 }
 
-const void Debugger::BezierControl()
+const void Debugger::bezierControl()
 {
 	ParticleType::Base* type = Scene::GetGameObject<ParticleEmitter>()->GetType();
 	if (!type) {
@@ -129,7 +129,7 @@ const void Debugger::BezierControl()
 	ImGui::End();
 }
 
-const void Debugger::ParticleControl()
+const void Debugger::particleControl()
 {
 	auto emitter = Scene::GetGameObject<ParticleEmitter>();
 	if (!emitter) {
@@ -161,7 +161,7 @@ const void Debugger::ParticleControl()
 	ImGui::Begin("Particle", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
 	ImGui::SeparatorText("Value");
 	ImGui::SliderInt("Frame", &emitter->mLife, 30, bezier.DEFAULT_FRAMEMAX);
-	ImGui::SliderInt("Count", &emitter->mCount, 10, 500);
+	ImGui::SliderInt("Count", &emitter->mCount, 10, 100);
 	ImGui::SliderScalar("Interval", ImGuiDataType_Double, &emitter->mMaxInterval, &min, &max, "%.3f");
 
 	ImGui::SeparatorText("MainColor");

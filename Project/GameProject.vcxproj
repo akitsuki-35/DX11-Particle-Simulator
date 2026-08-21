@@ -47,6 +47,7 @@
     <ClCompile Include="sources\00_Engine\00-3_Resource\Texture.cpp" />
     <ClCompile Include="sources\00_Engine\00-3_Resource\TextureManager.cpp" />
     <ClCompile Include="sources\00_Engine\00-4_Importer\AssimpLoader.cpp" />
+    <ClCompile Include="sources\00_Engine\00-4_Importer\CSVHandler.cpp" />
     <ClCompile Include="sources\00_Engine\00-4_Importer\FontLoader.cpp" />
     <ClCompile Include="sources\01_Framework\01-1_Common\BezierCurve.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
@@ -173,6 +174,7 @@
     <ClInclude Include="sources\00_Engine\00-3_Resource\Texture.h" />
     <ClInclude Include="sources\00_Engine\00-3_Resource\TextureManager.h" />
     <ClInclude Include="sources\00_Engine\00-4_Importer\AssimpLoader.h" />
+    <ClInclude Include="sources\00_Engine\00-4_Importer\CSVHandler.h" />
     <ClInclude Include="sources\00_Engine\00-4_Importer\FontLoader.h" />
     <ClInclude Include="sources\01_Framework\01-1_Common\BezierCurve.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>

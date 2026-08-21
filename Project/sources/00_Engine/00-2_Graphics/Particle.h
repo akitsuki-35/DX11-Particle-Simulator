@@ -9,7 +9,6 @@
 #pragma once
 
 #include "Vector3.h"
-#include "Mesh.h"
 
 namespace ParticleType {
 	class Base;
@@ -26,7 +25,6 @@ class Particle
 	friend class ParticleRenderer;
 
 private:
-	Mesh mMesh{};
 	Vector3 mPosition{ 0.0f, 0.0f, 0.0f };
 	Vector3 mScale{ 1.0f, 1.0f, 1.0f };
 	float mAlpha{ 1.0f };
@@ -37,7 +35,7 @@ private:
 	int mLife{ 0 };
 
 public:
-	Particle();
+	Particle() = default;
 
 	// 更新
 	void Update(double deltaTime);

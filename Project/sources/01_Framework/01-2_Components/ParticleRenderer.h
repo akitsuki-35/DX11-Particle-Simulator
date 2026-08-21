@@ -9,7 +9,7 @@
 #pragma once
 
 #include "Renderer.h"
-#include "Elements.h"
+#include "Mesh.h"
 
 /*------------------------------------------------------------
 	前方宣言
@@ -29,6 +29,9 @@ private:
 	// エミッタ
 	ParticleEmitter* _mEmitter{ nullptr };
 
+	// メッシュ
+	Mesh mMesh{};
+
 	// テクスチャ
 	Texture* _mTexture{ nullptr };
 
@@ -36,11 +39,7 @@ private:
 	DirectX::XMFLOAT4 mSubColor{ 1.0f, 1.0f, 1.0f, 1.0f };
 
 public:
-	ParticleRenderer(GameObject* owner)
-		: Renderer(owner) {
-		// 不透明レイヤーに描画
-		mSortKey.layer = Layer::Alpha;
-	};
+	ParticleRenderer(GameObject* owner);
 
 	~ParticleRenderer() override = default;
 
@@ -70,5 +69,6 @@ public:
 	ParticleRenderer* LoadTexture(const char* fileName);
 
 	// ゲッター
+	Mesh& GetMesh() { return mMesh; }
 	Texture* GetTexture() const { return _mTexture; }
 };

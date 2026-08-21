@@ -9,12 +9,23 @@
 #include "ParticleRenderer.h"
 #include "ParticleEmitter.h"
 #include "BufferManager.h"
+#include "MeshTypes.h"
 #include "Texture.h"
 #include "TextureManager.h"
+#include "Elements.h"
 #include "Camera.h"
 #include "Scene.h"
 
 using namespace DirectX;
+using namespace MeshType;
+
+ParticleRenderer::ParticleRenderer(GameObject* owner)
+	: Renderer(owner) 
+{
+	// 不透明レイヤーに描画
+	mSortKey.layer = Layer::Alpha;
+	mMesh.CreatePlane(Plane::Pivot::Center, Plane::Axis::XY);
+}
 
 void ParticleRenderer::Draw() const
 {
@@ -64,11 +75,11 @@ void ParticleRenderer::mainColorDraw(const DirectX::XMMATRIX& rotation) const
 	material.TextureEnable = static_cast<bool>(_mTexture != nullptr);
 	D3D11::BufferManager::getInstance().SetMaterial(material);
 
+	mMesh.Bind();
+
 	// 有効パーティクル個数
 	for (int i = 0; i < _mEmitter->PARTICLE_MAX; i++) {
 		if (_mEmitter->mParticles[i].mEnable) {
-
-			_mEmitter->mParticles[i].mMesh.Bind();
 
 			// マトリクス設定
 			XMMATRIX w{}, s{}, t{};
@@ -86,7 +97,7 @@ void ParticleRenderer::mainColorDraw(const DirectX::XMMATRIX& rotation) const
 			D3D11::BufferManager::getInstance().SetWorldMatrix(w);
 
 			// 描画
-			_mEmitter->mParticles[i].mMesh.Draw();
+			mMesh.Draw();
 		}
 	}
 }
@@ -102,8 +113,6 @@ void ParticleRenderer::subColorDraw(const DirectX::XMMATRIX& rotation) const
 	// 有効パーティクル個数
 	for (int i = 0; i < _mEmitter->PARTICLE_MAX; i++) {
 		if (_mEmitter->mParticles[i].mEnable) {
-
-			_mEmitter->mParticles[i].mMesh.Bind();
 
 			// マトリクス設定
 			XMMATRIX w{}, s{}, t{};
@@ -121,7 +130,7 @@ void ParticleRenderer::subColorDraw(const DirectX::XMMATRIX& rotation) const
 			D3D11::BufferManager::getInstance().SetWorldMatrix(w);
 
 			// 描画
-			_mEmitter->mParticles[i].mMesh.Draw();
+			mMesh.Draw();
 		}
 	}
 }

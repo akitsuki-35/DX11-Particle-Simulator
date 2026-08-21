@@ -294,6 +294,9 @@
     <ClCompile Include="sources\01_Framework\01-2_Components\GridRenderer.cpp">
       <Filter>01_Framework\01-2_Components\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="sources\00_Engine\00-4_Importer\CSVHandler.cpp">
+      <Filter>00_Engine\00-4_Importer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\00_Engine\00-1_Core\Application.h">
@@ -532,6 +535,9 @@
     </ClInclude>
     <ClInclude Include="sources\01_Framework\01-2_Components\GridRenderer.h">
       <Filter>01_Framework\01-2_Components\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\00_Engine\00-4_Importer\CSVHandler.h">
+      <Filter>00_Engine\00-4_Importer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

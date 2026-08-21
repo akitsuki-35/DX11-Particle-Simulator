@@ -25,7 +25,9 @@ class ParticleEmitter : public GameObject
 private:
 	static constexpr int PARTICLE_MAX{ 10000 };
 	std::vector<Particle> mParticles{};
-	int mCount{ 100 }; // 一度あたりの発射数
+
+	// 一度あたりの発射数
+	int mCount{ 100 };
 
 	// 全体フレーム
 	int mLife{ 60 };
