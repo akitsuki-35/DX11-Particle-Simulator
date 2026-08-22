@@ -20,38 +20,13 @@
 *============================================================*/
 class Debugger
 {
-/*--------------------------------------------------
-		Singleton用
-----------------------------------------------------*/
+	Debugger() = delete;
+
 public:
-	static Debugger& getInstance() {
-		static Debugger instance;
-		return instance;
-	}
-
-private:
-	Debugger() = default;
-	Debugger(const Debugger&) = delete;
-
-	Debugger& operator=(const Debugger&) = delete;
-	Debugger(Debugger&&) = delete;
-
-	Debugger& operator=(Debugger&&) = delete;
-	~Debugger() {};
-
-/*--------------------------------------------------
-	メンバ変数・メンバ関数
-----------------------------------------------------*/
-public:
-	// ===== 初期化～描画 =====
-	const void Initialize(HWND hwnd) const;
-	const void Finalize() const;
-	const void Update() const;
-	const void Draw() const;
-
-private:
-	// ===== デバッグウィンドウ関数をここに追加 =====
-	const void bezierControl();
-	const void particleControl();
+	// 初期化～描画
+	static const void Initialize(HWND hwnd);
+	static const void Finalize();
+	static const void Update();
+	static const void Draw();
 };
 #endif

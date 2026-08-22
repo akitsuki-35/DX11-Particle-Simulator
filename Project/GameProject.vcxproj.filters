@@ -138,16 +138,7 @@
     <ClCompile Include="sources\04_External\include\ImGui\imgui_widgets.cpp">
       <Filter>04_External\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="sources\99_Debug\DebugCollisiondraw.cpp">
-      <Filter>99_Debug</Filter>
-    </ClCompile>
     <ClCompile Include="sources\99_Debug\Debugger.cpp">
-      <Filter>99_Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\99_Debug\DebugOstream.cpp">
-      <Filter>99_Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\99_Debug\DebugText.cpp">
       <Filter>99_Debug</Filter>
     </ClCompile>
     <ClCompile Include="sources\00_Engine\00-1_Core\Utility.cpp">
@@ -258,9 +249,6 @@
     <ClCompile Include="sources\01_Framework\01-2_Components\AudioPlayer.cpp">
       <Filter>01_Framework\01-2_Components\AudioPlayer</Filter>
     </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-1_Common\Shadow.cpp">
-      <Filter>02_App\02-2_Objects\Common</Filter>
-    </ClCompile>
     <ClCompile Include="sources\00_Engine\00-2_Graphics\Particle.cpp">
       <Filter>00_Engine\00-2_Graphics\Effects</Filter>
     </ClCompile>
@@ -296,6 +284,9 @@
     </ClCompile>
     <ClCompile Include="sources\00_Engine\00-4_Importer\CSVHandler.cpp">
       <Filter>00_Engine\00-4_Importer</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\99_Debug\ParticleGUI.cpp">
+      <Filter>99_Debug</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -368,19 +359,10 @@
     <ClInclude Include="sources\04_External\include\ImGui\imstb_truetype.h">
       <Filter>04_External\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="sources\99_Debug\DebugCollisiondraw.h">
-      <Filter>99_Debug</Filter>
-    </ClInclude>
     <ClInclude Include="sources\99_Debug\Debugger.h">
       <Filter>99_Debug</Filter>
     </ClInclude>
     <ClInclude Include="sources\99_Debug\DebugMemoryleak.h">
-      <Filter>99_Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\99_Debug\DebugOstream.h">
-      <Filter>99_Debug</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\99_Debug\DebugText.h">
       <Filter>99_Debug</Filter>
     </ClInclude>
     <ClInclude Include="sources\00_Engine\00-1_Core\Utility.h">
@@ -500,9 +482,6 @@
     <ClInclude Include="sources\02_App\02-2_Objects\GameObject.h">
       <Filter>02_App\02-2_Objects\Common</Filter>
     </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\Shadow.h">
-      <Filter>02_App\02-2_Objects\Common</Filter>
-    </ClInclude>
     <ClInclude Include="sources\00_Engine\00-2_Graphics\Particle.h">
       <Filter>00_Engine\00-2_Graphics\Effects</Filter>
     </ClInclude>
@@ -538,6 +517,9 @@
     </ClInclude>
     <ClInclude Include="sources\00_Engine\00-4_Importer\CSVHandler.h">
       <Filter>00_Engine\00-4_Importer</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\99_Debug\ParticleGUI.h">
+      <Filter>99_Debug</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

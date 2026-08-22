@@ -9,7 +9,6 @@
 #pragma once
 
 #include "Vector3.h"
-#include "Debugger.h"
 #include <array>
 #include <vector>
 
@@ -20,7 +19,7 @@
 class BezierCurve
 {
 	// Debuggerから操作可能にする
-	friend Debugger;
+	friend class ParticleGUI;
 
 private:
 	struct POINT {

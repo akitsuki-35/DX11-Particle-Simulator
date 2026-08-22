@@ -11,6 +11,7 @@
 #include "BezierCurve.h"
 #include <string>
 #include <string_view>
+#include <memory>
 
 /*------------------------------------------------------------
 	前方宣言

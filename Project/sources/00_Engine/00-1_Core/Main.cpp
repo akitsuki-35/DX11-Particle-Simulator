@@ -32,7 +32,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	SceneManager::getInstance().Initialize();
 
 #ifndef NDEBUG
-	Debugger::getInstance().Initialize(System::Window::getInstance().GetHandle());
+	Debugger::Initialize(System::Window::getInstance().GetHandle());
 #endif
 
 	// ウィンドウ表示
@@ -47,7 +47,7 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	timeEndPeriod(1);
 
 #ifndef NDEBUG
-	Debugger::getInstance().Finalize();
+	Debugger::Finalize();
 #endif
 
 	SceneManager::getInstance().Finalize();	

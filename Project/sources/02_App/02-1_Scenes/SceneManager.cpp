@@ -77,7 +77,7 @@ void SceneManager::Update(double deltaTime)
 	}
 
 #ifndef NDEBUG
-	Debugger::getInstance().Update();
+	Debugger::Update();
 #endif
 
 }
@@ -94,7 +94,7 @@ void SceneManager::Draw()
 	Transition::getInstance().Draw();
 
 #ifndef NDEBUG
-	Debugger::getInstance().Draw();
+	Debugger::Draw();
 #endif
 
 	D3D11::Graphics::getInstance().End();

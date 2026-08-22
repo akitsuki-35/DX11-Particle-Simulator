@@ -23,7 +23,7 @@ class Texture;
 class ParticleRenderer : public Renderer
 {
 	friend class ParticleEmitter;
-	friend class Debugger;
+	friend class ParticleGUI;
 
 private:
 	// エミッタ

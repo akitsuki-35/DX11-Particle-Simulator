@@ -20,7 +20,7 @@
 class ParticleEmitter : public GameObject
 {
 	friend class ParticleRenderer;
-	friend class Debugger;
+	friend class ParticleGUI;
 
 private:
 	static constexpr int PARTICLE_MAX{ 10000 };
@@ -57,7 +57,7 @@ public:
 	void SetLife(const int& life) { mLife = life; }
 	void SetInterval(const double& interval) { mMaxInterval = mCurrentInterval = interval; }
 	void SetCount(const int& count) { mCount = count; }
-	void SetType(ParticleType::Type* type) { _mType.reset(std::move(type)); }
+	void SetType(std::unique_ptr<ParticleType::Type> type) { _mType = std::move(type); }
 
 	// CSVファイル読み込み
 	ParticleEmitter* LoadCSV(const char* filePath);

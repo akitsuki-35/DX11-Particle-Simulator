@@ -38,22 +38,24 @@ void Camera::Update(double deltaTime)
 	Vector3 rotation = mTransform.GetRotation();
 
 	if (Input::GetKeyPress('A')) {
-		mTransform.SetRotation({ rotation.x, rotation.y -= 2.0f * dt, rotation.z });
+		rotation.y -= 2.0f * dt;
 	}
 	else if (Input::GetKeyPress('D')) {
-		mTransform.SetRotation({ rotation.x, rotation.y += 2.0f * dt, rotation.z });
+		rotation.y += 2.0f * dt;
 	}
-	else if (Input::GetKeyPress('S')) {
-		mTransform.SetRotation({ rotation.x += 2.0f * dt, rotation.y, rotation.z });
+
+	if (Input::GetKeyPress('S')) {
+		rotation.x += 2.0f * dt;
 	}
 	else if (Input::GetKeyPress('W')) {
-		mTransform.SetRotation({ rotation.x -= 2.0f * dt, rotation.y, rotation.z });
+		rotation.x -= 2.0f * dt;
 	}
 
 	constexpr float maxPitch = DirectX::XMConvertToRadians(85.0f);
 	if (rotation.x < -maxPitch) rotation.x = -maxPitch;
 	if (rotation.x > maxPitch) rotation.x = maxPitch;
 
+	mTransform.SetRotation(rotation);
 	rotation = mTransform.GetRotation();
 
 	if (Input::GetKeyPress('I')) {

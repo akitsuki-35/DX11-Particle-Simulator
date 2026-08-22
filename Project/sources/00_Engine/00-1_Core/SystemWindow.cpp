@@ -90,7 +90,7 @@ int System::Window::ProcessMessage() const
 	// メッセージループ
 	MSG msg{};
 
-	if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
+	while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
 		if (msg.message == WM_QUIT) {
 			return true;
 		}
