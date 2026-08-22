@@ -11,6 +11,7 @@
 #include "ParticleEmitter.h"
 #include "ParticleRenderer.h"
 #include "ParticleTypes.h"
+#include "CSVHandler.h"
 #include "BezierCurve.h"
 #include "Texture.h"
 #include <filesystem>
@@ -79,13 +80,26 @@ const void ParticleGUI::fileControl(ParticleEmitter* emitter)
 		return;
 	}
 
-	ImGui::SeparatorText("CSV File");
-	ImGui::Text("Load CSV File");
+	// CSVファイル読み込み
+	ImGui::SeparatorText("Load CSV File");
 	loadCSV(emitter);
 
-	ImGui::SeparatorText("Texture File");
+	// CSVファイル出力
+	ImGui::SeparatorText("Export CSV File");
+	static char buf[128] = "";
+	ImGui::InputText(".csv", buf, IM_ARRAYSIZE(buf));
+
+	if (ImGui::Button("Export", ImVec2(50, 20))) {
+		if (exportCSV(emitter, buf)) {
+			mLog = "success:Export Success!";
+			CSVListInitialize();
+		}
+	}
+	ImGui::SameLine();
+	ImGui::Text(mLog.c_str());
+
+	ImGui::SeparatorText("Load Texture File");
 	ImGui::Image(reinterpret_cast<ImTextureID>(texture), ImVec2(100, 100));
-	ImGui::Text("Load Texture File");
 	loadTexture(emitter);
 
 	ImGui::End();
@@ -129,6 +143,50 @@ const void ParticleGUI::CSVListInitialize()
 			mCSVFiles.push_back(e.path().filename().string());
 		}
 	}
+}
+
+const bool ParticleGUI::exportCSV(ParticleEmitter* emitter, std::string fileName)
+{
+	if (fileName == "") {
+		mLog = "error:FileName Empty!";
+		return false;
+	}
+
+	auto renderer = emitter->GetComponent<ParticleRenderer>();
+
+	CSVHandler::Data exportData{};
+
+	exportData.push_back({ "TYPE", std::string(emitter->GetType()->GetTypeName()) });
+	exportData.push_back({ "LIFE", std::to_string(emitter->mLife) });
+	exportData.push_back({ "INTERVAL", std::to_string(emitter->mMaxInterval) });
+	exportData.push_back({ "COUNT", std::to_string(emitter->mCount) });
+
+	DirectX::XMFLOAT4 mainColor = renderer->mColor;
+	exportData.push_back({ 
+	"MAINCOLOR",
+	std::to_string(mainColor.x),
+	std::to_string(mainColor.y),
+	std::to_string(mainColor.z),
+	std::to_string(mainColor.w)});
+
+	DirectX::XMFLOAT4 subColor = renderer->mSubColor;
+	exportData.push_back({
+	"SUBCOLOR",
+	std::to_string(subColor.x),
+	std::to_string(subColor.y),
+	std::to_string(subColor.z),
+	std::to_string(subColor.w) });
+
+	std::string fullPath = "assets\\csv\\" + fileName + ".csv";
+
+	std::filesystem::create_directories("assets\\csv\\");
+
+	if (!CSVHandler::Export(fullPath.c_str(), exportData)) {
+		mLog = "error:Export Failed!";
+		return false;
+	}
+
+	return true;
 }
 
 const void ParticleGUI::loadTexture(ParticleEmitter* emitter)

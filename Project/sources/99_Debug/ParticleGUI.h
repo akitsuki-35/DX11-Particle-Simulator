@@ -45,6 +45,8 @@ private:
 	メンバ変数・メンバ関数
 ----------------------------------------------------*/
 private:
+	std::string mLog{};
+
 	std::vector<std::string> mCSVFiles{};
 	int mCSVIndex{ 0 };
 
@@ -61,6 +63,7 @@ private:
 
 	const void loadCSV(ParticleEmitter* emitter);
 	const void CSVListInitialize();
+	const bool exportCSV(ParticleEmitter* emitter, std::string fileName);
 
 	const void loadTexture(ParticleEmitter* emitter);
 	const void textureListInitialize();

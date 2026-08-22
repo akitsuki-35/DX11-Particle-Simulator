@@ -79,7 +79,7 @@ bool CSVHandler::Export(const char* filePath, const Data& data)
 
     file.close();
 
-    return false;
+    return true;
 }
 
 std::string CSVHandler::GetString(const Row& row, size_t index, const std::string& defaultValue)
