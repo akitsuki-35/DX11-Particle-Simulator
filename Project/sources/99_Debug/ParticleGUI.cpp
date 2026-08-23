@@ -20,25 +20,33 @@
 
 const void ParticleGUI::Display()
 {
+	// エミッタ取得
 	auto emitter = Scene::GetGameObject<ParticleEmitter>();
 	if (!emitter) {
 		return;
 	}
 
+	// 各種GUI表示
 	parameterControl(emitter);
 	particleControl(emitter);
 	fileControl(emitter);
+
+	// ウィンドウのフォーカス解除
+	if (!mInitialized) {
+		ImGui::SetWindowFocus(nullptr);
+		mInitialized = true;
+	}
 }
 
 const void ParticleGUI::parameterControl(ParticleEmitter* emitter)
 {
-	ParticleType::Type* type = emitter->GetType();
-	if (!type) {
+	auto renderer = emitter->GetComponent<ParticleRenderer>();
+
+	if (!renderer) {
 		return;
 	}
 
-	auto renderer = emitter->GetComponent<ParticleRenderer>();
-
+	// インターバル最大値と最小値を設定
 	double min = 0.005;
 	double max = 0.1;
 
@@ -47,16 +55,19 @@ const void ParticleGUI::parameterControl(ParticleEmitter* emitter)
 	// ウィンドウサイズ固定
 	ImGui::SetNextWindowSize(ImVec2(300, 660), ImGuiCond_Always);
 
+	// 共通パラメータ操作
 	ImGui::Begin("Parameter", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
 	ImGui::SeparatorText("Value");
 	ImGui::SliderInt("Frame", &emitter->mLife, 30, 60);
 	ImGui::SliderInt("Count", &emitter->mCount, 10, 100);
 	ImGui::SliderScalar("Interval", ImGuiDataType_Double, &emitter->mMaxInterval, &min, &max, "%.3f");
 
+	// メインカラー操作
 	ImGui::SeparatorText("MainColor");
 	ImGui::ColorPicker3("MainPicker", &renderer->mColor.x,
 		ImGuiColorEditFlags_PickerHueWheel | ImGuiColorEditFlags_NoAlpha | ImGuiColorEditFlags_Float);
 
+	// サブカラー操作
 	ImGui::SeparatorText("SubColor");
 	ImGui::ColorPicker3("SubPicker", &renderer->mSubColor.x,
 		ImGuiColorEditFlags_PickerHueWheel | ImGuiColorEditFlags_NoAlpha | ImGuiColorEditFlags_Float);
@@ -66,19 +77,20 @@ const void ParticleGUI::parameterControl(ParticleEmitter* emitter)
 
 const void ParticleGUI::fileControl(ParticleEmitter* emitter)
 {
-	// ウィンドウ位置固定
-	ImGui::SetNextWindowPos(ImVec2(0, 660), ImGuiCond_Always);
-	// ウィンドウサイズ固定
-	ImGui::SetNextWindowSize(ImVec2(300, 300), ImGuiCond_Always);
-
-	ImGui::Begin("File", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
-
 	auto renderer = emitter->GetComponent<ParticleRenderer>();
-	auto texture = renderer->GetTexture()->GetSRV();
 
+	// テクスチャ取得
+	auto texture = renderer->GetTexture()->GetSRV();
 	if (!texture) {
 		return;
 	}
+
+	// ウィンドウ位置固定
+	ImGui::SetNextWindowPos(ImVec2(0, 660), ImGuiCond_Always);
+	// ウィンドウサイズ固定
+	ImGui::SetNextWindowSize(ImVec2(300, 420), ImGuiCond_Always);
+
+	ImGui::Begin("File", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
 
 	// CSVファイル読み込み
 	ImGui::SeparatorText("Load CSV File");
@@ -86,20 +98,32 @@ const void ParticleGUI::fileControl(ParticleEmitter* emitter)
 
 	// CSVファイル出力
 	ImGui::SeparatorText("Export CSV File");
+
+	// ファイル名
 	static char buf[128] = "";
 	ImGui::InputText(".csv", buf, IM_ARRAYSIZE(buf));
 
+	static ImVec4 logTextColor = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
+
+	// ファイルエクスポート
 	if (ImGui::Button("Export", ImVec2(50, 20))) {
 		if (exportCSV(emitter, buf)) {
-			mLog = "success:Export Success!";
+			// ファイル配列を再読み込み
 			CSVListInitialize();
+			logTextColor = ImVec4(0.0f, 1.0f, 0.0f, 1.0f);
+		}
+		else {
+			logTextColor = ImVec4(1.0f, 0.0f, 0.0f, 1.0f);
 		}
 	}
-	ImGui::SameLine();
-	ImGui::Text(mLog.c_str());
 
+	// ログ表示
+	ImGui::SameLine();
+	ImGui::TextColored(logTextColor, mLog.c_str());
+
+	// テクスチャ読み込み
 	ImGui::SeparatorText("Load Texture File");
-	ImGui::Image(reinterpret_cast<ImTextureID>(texture), ImVec2(100, 100));
+	ImGui::Image(reinterpret_cast<ImTextureID>(texture), ImVec2(150, 150));
 	loadTexture(emitter);
 
 	ImGui::End();
@@ -107,10 +131,12 @@ const void ParticleGUI::fileControl(ParticleEmitter* emitter)
 
 const void ParticleGUI::loadCSV(ParticleEmitter* emitter)
 {
+	// ファイル配列が空の場合は初期化
 	if (mCSVFiles.empty()) {
 		CSVListInitialize();
 	}
 
+	// リストからのファイルのロード処理
 	if (!mCSVFiles.empty()) {
 		if (ImGui::BeginCombo("##CSVList", mCSVFiles[mCSVIndex].c_str())) {
 			for (int i = 0; i < static_cast<int>(mCSVFiles.size()); ++i) {
@@ -135,9 +161,13 @@ const void ParticleGUI::loadCSV(ParticleEmitter* emitter)
 
 const void ParticleGUI::CSVListInitialize()
 {
+	// ファイル配列初期化
 	mCSVFiles.clear();
+
+	// 探索ディレクトリ設定
 	std::string path = "assets\\csv\\";
 
+	// ディレクトリ内のファイルを取得
 	if (std::filesystem::exists(path)) {
 		for (const auto& e : std::filesystem::directory_iterator(path)) {
 			mCSVFiles.push_back(e.path().filename().string());
@@ -147,6 +177,7 @@ const void ParticleGUI::CSVListInitialize()
 
 const bool ParticleGUI::exportCSV(ParticleEmitter* emitter, std::string fileName)
 {
+	// ファイル名が空の場合はreturn
 	if (fileName == "") {
 		mLog = "error:FileName Empty!";
 		return false;
@@ -156,50 +187,79 @@ const bool ParticleGUI::exportCSV(ParticleEmitter* emitter, std::string fileName
 
 	CSVHandler::Data exportData{};
 
-	exportData.push_back({ "TYPE", std::string(emitter->GetType()->GetTypeName()) });
+	// タイプ別のエクスポート処理のためタイプを格納
+	auto type = emitter->GetType();
+
+	// 共通パラメータ取得
+	exportData.push_back({ "TYPE", type->GetTypeName().data() });
 	exportData.push_back({ "LIFE", std::to_string(emitter->mLife) });
 	exportData.push_back({ "INTERVAL", std::to_string(emitter->mMaxInterval) });
 	exportData.push_back({ "COUNT", std::to_string(emitter->mCount) });
 
+	// メインカラー取得
 	DirectX::XMFLOAT4 mainColor = renderer->mColor;
-	exportData.push_back({ 
-	"MAINCOLOR",
-	std::to_string(mainColor.x),
-	std::to_string(mainColor.y),
-	std::to_string(mainColor.z),
-	std::to_string(mainColor.w)});
+	exportData.push_back({ "MAINCOLOR", std::to_string(mainColor.x), std::to_string(mainColor.y),
+		std::to_string(mainColor.z), std::to_string(mainColor.w)});
 
+	// サブカラー取得
 	DirectX::XMFLOAT4 subColor = renderer->mSubColor;
-	exportData.push_back({
-	"SUBCOLOR",
-	std::to_string(subColor.x),
-	std::to_string(subColor.y),
-	std::to_string(subColor.z),
-	std::to_string(subColor.w) });
+	exportData.push_back({ "SUBCOLOR", std::to_string(subColor.x), std::to_string(subColor.y),
+		std::to_string(subColor.z), std::to_string(subColor.w) });
 
+	// タイプ特有のパラメータを取得
+	if (type->GetTypeName() == "Box") {
+
+	}
+	if (type->GetTypeName() == "Bezier") {
+		BezierCurve& bezier = dynamic_cast<ParticleType::Bezier*>(type)->GetBezier();
+		exportData.push_back({ "CONTROLPOINT0", std::to_string(bezier.mControlPoint[0].position.x), 
+			std::to_string(bezier.mControlPoint[0].position.y),
+			std::to_string(bezier.mControlPoint[0].position.z) });
+
+		exportData.push_back({ "CONTROLPOINT1", std::to_string(bezier.mControlPoint[1].position.x),
+			std::to_string(bezier.mControlPoint[1].position.y),
+			std::to_string(bezier.mControlPoint[1].position.z) });
+
+		exportData.push_back({ "CONTROLPOINT2", std::to_string(bezier.mControlPoint[2].position.x),
+			std::to_string(bezier.mControlPoint[2].position.y),
+			std::to_string(bezier.mControlPoint[2].position.z) });
+
+		exportData.push_back({ "CONTROLPOINT3", std::to_string(bezier.mControlPoint[3].position.x),
+			std::to_string(bezier.mControlPoint[3].position.y),
+			std::to_string(bezier.mControlPoint[3].position.z) });
+	}
+
+	// 出力先パス設定
 	std::string fullPath = "assets\\csv\\" + fileName + ".csv";
 
+	// フォルダが存在しない場合は生成
 	std::filesystem::create_directories("assets\\csv\\");
 
+	// エクスポート実行
 	if (!CSVHandler::Export(fullPath.c_str(), exportData)) {
 		mLog = "error:Export Failed!";
 		return false;
 	}
+
+	mLog = "success:Export Success!";
 
 	return true;
 }
 
 const void ParticleGUI::loadTexture(ParticleEmitter* emitter)
 {
+	// ファイル配列が空の場合は初期化
 	if (mTextureFiles.empty()) {
 		textureListInitialize();
 	}
 
+	// リストからのファイルのロード処理
 	if (!mTextureFiles.empty()) {
 		if (ImGui::BeginCombo("##TextureList", mTextureFiles[mTextureIndex].c_str())) {
 			for (int i = 0; i < static_cast<int>(mTextureFiles.size()); ++i) {
 				const bool isSelected = (mTextureIndex == i);
 
+				
 				if (ImGui::Selectable(mTextureFiles[i].c_str(), isSelected)) {
 					mTextureIndex = i;
 
@@ -220,7 +280,10 @@ const void ParticleGUI::loadTexture(ParticleEmitter* emitter)
 
 const void ParticleGUI::textureListInitialize()
 {
+	// ファイル配列初期化
 	mTextureFiles.clear();
+
+	// 探索ディレクトリ設定
 	std::string path = "assets\\textures\\";
 
 	if (std::filesystem::exists(path)) {
@@ -229,9 +292,11 @@ const void ParticleGUI::textureListInitialize()
 				continue;
 			}
 
+			// ディレクトリ内のファイルを取得
 			std::string ext = e.path().extension().string();
 			for (auto& c : ext) c = static_cast<char>(std::tolower(c));
 
+			// テクスチャとして使える形式のファイルのみを取得
 			if (ext == ".png" || ext == ".jpg" || ext == ".tga") {
 				mTextureFiles.push_back(e.path().filename().string());
 			}
@@ -249,11 +314,18 @@ const void ParticleGUI::particleControl(ParticleEmitter* emitter)
 	// 移動不可・サイズ変更不可
 	ImGui::Begin("Type Parameter", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
 
-	// ボタンによるタイプ変更
-	typeControl(emitter);
-
+	// タイプ名取得
 	ParticleType::Type* type = Scene::GetGameObject<ParticleEmitter>()->GetType();
 	std::string name = type->GetTypeName().data();
+
+	// 現在のタイプ名を表示
+	std::string text = "Current Type : " + name;
+	ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), text.c_str());
+
+	ImGui::SeparatorText("Set Particle Type");
+
+	// ボタンによるタイプ変更
+	typeControl(emitter);
 
 	// タイプ別のパラメータ制御
 	if (name == "Box") {
