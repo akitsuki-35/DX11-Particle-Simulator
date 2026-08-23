@@ -15,6 +15,8 @@
 #include "AudioPlayer.h"
 #include "Debugger.h"
 
+#include "ImGui/imgui.h"
+
 /*------------------------------------------------------------
 	初期化
 ------------------------------------------------------------*/
@@ -58,7 +60,11 @@ void SceneManager::Finalize()
 void SceneManager::Update(double deltaTime)
 {
 	Transition::getInstance().Update(deltaTime);
-	Input::Update();
+
+	// ImGuiウィンドウアクティブ時は操作不可にする
+	if (!ImGui::GetIO().WantCaptureKeyboard) {
+		Input::Update();
+	}
 
 	if(mCurrentScene) mCurrentScene->Update(deltaTime);
 

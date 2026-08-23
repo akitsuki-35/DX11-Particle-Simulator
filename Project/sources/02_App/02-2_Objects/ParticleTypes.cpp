@@ -32,8 +32,12 @@ ParticleType::Type* ParticleType::Type::LoadCSV(const char* filePath)
 
 	for (const auto& row : data){
 		std::string tag = CSVHandler::GetString(row, 0);
+		std::string type{};
 
-		if(tag == "LIFE") {
+		if (tag == "TYPE") {
+			type = CSVHandler::GetString(row, 1);
+		}
+		if (tag == "LIFE") {
 			// 全体フレーム取得
 			int life = CSVHandler::GetInt(row, 1, 60);
 			_mEmitter->SetLife(life);

@@ -45,6 +45,7 @@ private:
 	メンバ変数・メンバ関数
 ----------------------------------------------------*/
 private:
+	bool mInitialized{ false };
 	std::string mLog{};
 
 	std::vector<std::string> mCSVFiles{};
@@ -57,17 +58,22 @@ public:
 	const void Display();
 
 private:
+	// 共通パラメータ操作
 	const void parameterControl(ParticleEmitter* emitter);
 
+	// ファイル操作
 	const void fileControl(ParticleEmitter* emitter);
 
+	// CSVファイル関連
 	const void loadCSV(ParticleEmitter* emitter);
 	const void CSVListInitialize();
 	const bool exportCSV(ParticleEmitter* emitter, std::string fileName);
 
+	// テクスチャ関連
 	const void loadTexture(ParticleEmitter* emitter);
 	const void textureListInitialize();
 
+	// タイプ別パラメータ操作
 	const void particleControl(ParticleEmitter* emitter);
 	const void typeControl(ParticleEmitter* emitter);
 	const void bezierControl(ParticleEmitter* emitter);
