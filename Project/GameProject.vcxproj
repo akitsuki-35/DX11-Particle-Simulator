@@ -83,8 +83,9 @@
     </ClCompile>
     <ClCompile Include="sources\02_App\02-2_Objects\Field.cpp" />
     <ClCompile Include="sources\02_App\02-2_Objects\Grid.cpp" />
+    <ClCompile Include="sources\02_App\02-2_Objects\ParticleBox.cpp" />
     <ClCompile Include="sources\02_App\02-2_Objects\ParticleEmitter..cpp" />
-    <ClCompile Include="sources\02_App\02-2_Objects\ParticleTypes.cpp" />
+    <ClCompile Include="sources\02_App\02-2_Objects\ParticleBase.cpp" />
     <ClCompile Include="sources\02_App\02-2_Objects\Sky.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -203,8 +204,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\Grid.h" />
+    <ClInclude Include="sources\02_App\02-2_Objects\ParticleBox.h" />
     <ClInclude Include="sources\02_App\02-2_Objects\ParticleEmitter.h" />
-    <ClInclude Include="sources\02_App\02-2_Objects\ParticleTypes.h" />
+    <ClInclude Include="sources\02_App\02-2_Objects\ParticleBase.h" />
     <ClInclude Include="sources\02_App\02-2_Objects\Sky.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>

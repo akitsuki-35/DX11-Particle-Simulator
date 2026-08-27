@@ -8,6 +8,7 @@
 *============================================================*/
 #include "ParticleEmitter.h"
 #include "ParticleRenderer.h"
+#include "ParticleBox.h"
 #include "MeshTypes.h"
 #include "Input.h"
 

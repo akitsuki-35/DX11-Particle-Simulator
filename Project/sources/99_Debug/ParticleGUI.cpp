@@ -10,7 +10,8 @@
 #include "Scene.h"
 #include "ParticleEmitter.h"
 #include "ParticleRenderer.h"
-#include "ParticleTypes.h"
+#include "ParticleBase.h"
+#include "ParticleBox.h"
 #include "CSVHandler.h"
 #include "BezierCurve.h"
 #include "Texture.h"
@@ -315,7 +316,7 @@ const void ParticleGUI::particleControl(ParticleEmitter* emitter)
 	ImGui::Begin("Type Parameter", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
 
 	// タイプ名取得
-	ParticleType::Type* type = Scene::GetGameObject<ParticleEmitter>()->GetType();
+	ParticleType::Base* type = Scene::GetGameObject<ParticleEmitter>()->GetType();
 	std::string name = type->GetTypeName().data();
 
 	// 現在のタイプ名を表示
@@ -366,7 +367,7 @@ const void ParticleGUI::typeControl(ParticleEmitter* emitter)
 
 const void ParticleGUI::bezierControl(ParticleEmitter* emitter)
 {
-	ParticleType::Type* type = emitter->GetType();
+	ParticleType::Base* type = emitter->GetType();
 	if (!type) {
 		return;
 	}

@@ -1,19 +1,19 @@
 ﻿/*============================================================
-*	@file	 : ParticleTypes.cpp
-*	@brief	 : パーティクルタイプ定義
+*	@file	 : ParticleBase.cpp
+*	@brief	 : パーティクル基底クラス
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/19
-*	@updated : 2026/08/19
+*	@updated : 2026/08/27
 *============================================================*/
-#include "ParticleTypes.h"
+#include "ParticleBase.h"
 #include "ParticleEmitter.h"
 #include "ParticleRenderer.h"
 #include "CSVHandler.h"
 
 using namespace DirectX;
 
-void ParticleType::Type::Update(double deltaTime)
+void ParticleType::Base::Update(double deltaTime)
 {
 	auto& particles = _mEmitter->GetParticles();
 	for (int i = 0; i < _mEmitter->GetParticleMax(); i++) {
@@ -21,7 +21,7 @@ void ParticleType::Type::Update(double deltaTime)
 	}
 }
 
-ParticleType::Type* ParticleType::Type::LoadCSV(const char* filePath)
+ParticleType::Base* ParticleType::Base::LoadCSV(const char* filePath)
 {
 	CSVHandler::Data data{};
 
@@ -79,39 +79,13 @@ ParticleType::Type* ParticleType::Type::LoadCSV(const char* filePath)
 	return this;
 }
 
-void ParticleType::Box::Emission()
-{
-	int count = _mEmitter->GetCount();
-	auto& particles = _mEmitter->GetParticles();
-
-	// パーティクル発射
-	for (int i = 0; i < _mEmitter->GetParticleMax(); i++) {
-		if (!particles[i].IsEnable()) {
-
-			Vector3 position = _mEmitter->GetTransform().GetPosition();
-			Vector3 velocity = { ((float)rand() / RAND_MAX - 0.5f) * 20.0f,
-				((float)rand() / RAND_MAX) * 20.0f,
-				((float)rand() / RAND_MAX - 0.5f) * 20.0f };
-			float scale = ((float)rand() / RAND_MAX - 0.5f) * 5.0f;
-
-			particles[i].SetParameter(position, velocity, { scale, scale, scale }, _mEmitter->GetLife());
-			particles[i].Enable();
-
-			count--;
-			if (count <= 0) {
-				break;
-			}
-		}
-	}
-}
-
 void ParticleType::Bezier::Update(double deltaTime)
 {
 	// 現フレームのベジエ曲線上の座標を取得
 	mBezier.Update();
 	_mEmitter->SetPosition(mBezier.GetBezierPoint(mBezier.GetFrame()));
 
-	Type::Update(deltaTime);
+	Base::Update(deltaTime);
 }
 
 void ParticleType::Bezier::Emission()

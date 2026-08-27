@@ -1,10 +1,10 @@
 ﻿/*============================================================
-*	@file	 : ParticleTypes.h
+*	@file	 : ParticleBase.h
 *	@brief	 : パーティクルタイプ定義
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/19
-*	@updated : 2026/08/19
+*	@updated : 2026/08/27
 *============================================================*/
 #pragma once
 
@@ -27,51 +27,36 @@ namespace ParticleType {
 	*	@class	: Particle::Base
 	*	@brief	: パーティクル形状基底クラス
 	*============================================================*/
-	class Type
+	class Base
 	{
 	protected:
 		ParticleEmitter* _mEmitter{};
 
 	public:
-		Type(ParticleEmitter* emitter) 
+		Base(ParticleEmitter* emitter) 
 			:_mEmitter(emitter) {}
-		virtual ~Type() = default;
+		virtual ~Base() = default;
 
 		virtual void Emission() = 0;
 		virtual void Update(double deltaTime);
 
 		// CSVファイル読み込み・書き出し
-		virtual Type* LoadCSV(const char* filePath);
+		virtual Base* LoadCSV(const char* filePath);
 		virtual std::string_view GetTypeName() const = 0;
-	};
-
-	/*============================================================
-	*	@class	: Particle::Box
-	*	@brief	: ボックス型パーティクル
-	*============================================================*/
-	class Box : public Type
-	{
-	public:
-		Box(ParticleEmitter* emitter)
-			: Type(emitter) {}
-
-		void Emission() override;
-
-		std::string_view GetTypeName() const override { return "Box"; };
 	};
 
 	/*============================================================
 	*	@class	: Particle::Bezier
 	*	@brief	: ベジエ曲線上を移動するパーティクル
 	*============================================================*/
-	class Bezier : public Type
+	class Bezier : public Base
 	{
 	private:
 		BezierCurve mBezier{};
 
 	public:
 		Bezier(ParticleEmitter* emitter)
-			: Type(emitter) {}
+			: Base(emitter) {}
 
 		void Update(double deltaTime) override;
 

@@ -10,7 +10,7 @@
 
 #include "GameObject.h"
 #include "Particle.h"
-#include "ParticleTypes.h"
+#include "ParticleBase.h"
 #include <memory>
 
 /*============================================================
@@ -36,7 +36,7 @@ private:
 	// 一度あたりの発射数
 	int mCount{ 100 };
 
-	std::unique_ptr<ParticleType::Type> _mType{};
+	std::unique_ptr<ParticleType::Base> _mType{};
 
 public:	
 	ParticleEmitter() = default;
@@ -47,7 +47,7 @@ public:
 	void Draw() const override;
 
 	// ゲッター
-	ParticleType::Type* GetType() const { return _mType.get(); }
+	ParticleType::Base* GetType() const { return _mType.get(); }
 	int GetParticleMax() const { return PARTICLE_MAX; }
 	std::vector<Particle>& GetParticles() { return mParticles; }
 	int GetCount() const { return mCount; }
@@ -57,7 +57,7 @@ public:
 	void SetLife(const int& life) { mLife = life; }
 	void SetInterval(const double& interval) { mMaxInterval = mCurrentInterval = interval; }
 	void SetCount(const int& count) { mCount = count; }
-	void SetType(std::unique_ptr<ParticleType::Type> type) { _mType = std::move(type); }
+	void SetType(std::unique_ptr<ParticleType::Base> type) { _mType = std::move(type); }
 
 	// CSVファイル読み込み
 	ParticleEmitter* LoadCSV(const char* filePath);
