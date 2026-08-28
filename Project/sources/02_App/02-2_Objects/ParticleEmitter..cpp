@@ -55,6 +55,10 @@ void ParticleEmitter::Draw() const
 
 ParticleEmitter* ParticleEmitter::LoadCSV(const char* filePath)
 {
-	_mType->LoadCSV(filePath);
+	auto newType = _mType->LoadCSV(filePath);
+
+	if (newType) {
+		this->SetType(std::move(newType));
+	}
 	return this;
 }

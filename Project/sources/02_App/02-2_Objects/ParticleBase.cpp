@@ -7,6 +7,8 @@
 *	@updated : 2026/08/27
 *============================================================*/
 #include "ParticleBase.h"
+#include "ParticleBox.h"
+#include "ParticleBezier.h"
 #include "ParticleEmitter.h"
 #include "ParticleRenderer.h"
 #include "CSVHandler.h"
@@ -21,21 +23,28 @@ void ParticleType::Base::Update(double deltaTime)
 	}
 }
 
-ParticleType::Base* ParticleType::Base::LoadCSV(const char* filePath)
+std::unique_ptr<ParticleType::Base> ParticleType::Base::LoadCSV(const char* filePath)
 {
 	CSVHandler::Data data{};
 
 	// ロード失敗時はreturn
 	if (!CSVHandler::Load(filePath, data)) {
-		return this;
+		return nullptr;
 	}
+
+	std::unique_ptr<ParticleType::Base> newType = nullptr;
 
 	for (const auto& row : data){
 		std::string tag = CSVHandler::GetString(row, 0);
-		std::string type{};
 
 		if (tag == "TYPE") {
-			type = CSVHandler::GetString(row, 1);
+			std::string type = CSVHandler::GetString(row, 1);
+			if (type == "Box") {
+				newType = std::make_unique<ParticleType::Box>(_mEmitter);
+			}
+			if (type == "Bezier") {
+				newType = std::make_unique<ParticleType::Bezier>(_mEmitter);
+			}
 		}
 		if (tag == "LIFE") {
 			// 全体フレーム取得
@@ -76,50 +85,5 @@ ParticleType::Base* ParticleType::Base::LoadCSV(const char* filePath)
 		}
 	}
 
-	return this;
-}
-
-void ParticleType::Bezier::Update(double deltaTime)
-{
-	// 現フレームのベジエ曲線上の座標を取得
-	mBezier.Update();
-	_mEmitter->SetPosition(mBezier.GetBezierPoint(mBezier.GetFrame()));
-
-	Base::Update(deltaTime);
-}
-
-void ParticleType::Bezier::Emission()
-{
-	int count = _mEmitter->GetCount();
-	auto& particles = _mEmitter->GetParticles();
-
-	// 全体フレームをセット
-	mBezier.SetFrameMax(_mEmitter->GetLife());
-
-	// ベジエ曲線再計算
-	mBezier.CalcBezier();
-
-	// 現フレームのベジエ曲線上の座標を取得
-	mBezier.Update();
-	_mEmitter->SetPosition(mBezier.GetBezierPoint(mBezier.GetFrame()));
-
-	Vector3 position = _mEmitter->GetTransform().GetPosition();
-
-	// パーティクル発射
-	for (int i = 0; i < _mEmitter->GetParticleMax(); i++) {
-		if (!particles[i].IsEnable()) {
-			Vector3 velocity = { ((float)rand() / RAND_MAX - 0.5f) * 20.0f,
-				((float)rand() / RAND_MAX) * 20.0f,
-				((float)rand() / RAND_MAX - 0.5f) * 20.0f };
-			float scale = ((float)rand() / RAND_MAX - 0.5f) * 5.0f;
-
-			particles[i].SetParameter(position, velocity, { scale, scale, scale }, _mEmitter->GetLife());
-			particles[i].Enable();
-
-			count--;
-			if (count <= 0) {
-				break;
-			}
-		}
-	}
+	return newType;
 }

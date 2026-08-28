@@ -25,5 +25,4 @@ namespace ParticleType {
 
 		std::string_view GetTypeName() const override { return "Box"; };
 	};
-
 }

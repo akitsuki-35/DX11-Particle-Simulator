@@ -294,6 +294,9 @@
     <ClCompile Include="sources\02_App\02-2_Objects\ParticleBox.cpp">
       <Filter>02_App\02-2_Objects\Particle</Filter>
     </ClCompile>
+    <ClCompile Include="sources\02_App\02-2_Objects\ParticleBezier.cpp">
+      <Filter>02_App\02-2_Objects\Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\00_Engine\00-1_Core\Application.h">
@@ -528,6 +531,9 @@
       <Filter>02_App\02-2_Objects\Particle</Filter>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\ParticleBox.h">
+      <Filter>02_App\02-2_Objects\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\ParticleBezier.h">
       <Filter>02_App\02-2_Objects\Particle</Filter>
     </ClInclude>
   </ItemGroup>
