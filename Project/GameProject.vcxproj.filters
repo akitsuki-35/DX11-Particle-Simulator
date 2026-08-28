@@ -97,6 +97,9 @@
     <Filter Include="00_Engine\00-2_Graphics\Effects">
       <UniqueIdentifier>{acdab742-2005-44cb-bb82-f8cea4659a79}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02_App\02-2_Objects\Particle">
+      <UniqueIdentifier>{2f3d90ba-410d-4509-9e0d-164f192673f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\00_Engine\00-1_Core\Application.cpp">
@@ -258,12 +261,6 @@
     <ClCompile Include="sources\01_Framework\01-1_Common\BezierCurve.cpp">
       <Filter>01_Framework\01-1_Common</Filter>
     </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\ParticleEmitter..cpp">
-      <Filter>02_App\02-2_Objects\Common</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\02_App\02-2_Objects\ParticleTypes.cpp">
-      <Filter>02_App\02-2_Objects\Common</Filter>
-    </ClCompile>
     <ClCompile Include="sources\00_Engine\00-1_Core\SystemTimer.cpp">
       <Filter>00_Engine\00-1_Core</Filter>
     </ClCompile>
@@ -287,6 +284,18 @@
     </ClCompile>
     <ClCompile Include="sources\99_Debug\ParticleGUI.cpp">
       <Filter>99_Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\02_App\02-2_Objects\ParticleBase.cpp">
+      <Filter>02_App\02-2_Objects\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\02_App\02-2_Objects\ParticleEmitter..cpp">
+      <Filter>02_App\02-2_Objects\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\02_App\02-2_Objects\ParticleBox.cpp">
+      <Filter>02_App\02-2_Objects\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\02_App\02-2_Objects\ParticleBezier.cpp">
+      <Filter>02_App\02-2_Objects\Particle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -491,12 +500,6 @@
     <ClInclude Include="sources\01_Framework\01-1_Common\BezierCurve.h">
       <Filter>01_Framework\01-1_Common</Filter>
     </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\ParticleEmitter.h">
-      <Filter>02_App\02-2_Objects\Common</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\02_App\02-2_Objects\ParticleTypes.h">
-      <Filter>02_App\02-2_Objects\Common</Filter>
-    </ClInclude>
     <ClInclude Include="sources\00_Engine\00-1_Core\SystemTimer.h">
       <Filter>00_Engine\00-1_Core</Filter>
     </ClInclude>
@@ -520,6 +523,18 @@
     </ClInclude>
     <ClInclude Include="sources\99_Debug\ParticleGUI.h">
       <Filter>99_Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\ParticleBase.h">
+      <Filter>02_App\02-2_Objects\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\ParticleEmitter.h">
+      <Filter>02_App\02-2_Objects\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\ParticleBox.h">
+      <Filter>02_App\02-2_Objects\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\02_App\02-2_Objects\ParticleBezier.h">
+      <Filter>02_App\02-2_Objects\Particle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

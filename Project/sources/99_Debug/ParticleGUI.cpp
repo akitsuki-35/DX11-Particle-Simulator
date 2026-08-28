@@ -10,10 +10,15 @@
 #include "Scene.h"
 #include "ParticleEmitter.h"
 #include "ParticleRenderer.h"
-#include "ParticleTypes.h"
-#include "CSVHandler.h"
 #include "BezierCurve.h"
 #include "Texture.h"
+#include "CSVHandler.h"
+
+// パーティクルタイプ
+#include "ParticleBase.h"
+#include "ParticleBox.h"
+#include "ParticleBezier.h"
+
 #include <filesystem>
 
 #include "ImGui/imgui.h"
@@ -157,6 +162,8 @@ const void ParticleGUI::loadCSV(ParticleEmitter* emitter)
 			ImGui::EndCombo();
 		}
 	}
+
+	emitter->SetPosition({ 0.0f, 0.0f, 0.0f });
 }
 
 const void ParticleGUI::CSVListInitialize()
@@ -212,21 +219,21 @@ const bool ParticleGUI::exportCSV(ParticleEmitter* emitter, std::string fileName
 	}
 	if (type->GetTypeName() == "Bezier") {
 		BezierCurve& bezier = dynamic_cast<ParticleType::Bezier*>(type)->GetBezier();
-		exportData.push_back({ "CONTROLPOINT0", std::to_string(bezier.mControlPoint[0].position.x), 
-			std::to_string(bezier.mControlPoint[0].position.y),
-			std::to_string(bezier.mControlPoint[0].position.z) });
+		exportData.push_back({ "CONTROLPOINT0", std::to_string(bezier.mControlPoints[0].position.x), 
+			std::to_string(bezier.mControlPoints[0].position.y),
+			std::to_string(bezier.mControlPoints[0].position.z) });
 
-		exportData.push_back({ "CONTROLPOINT1", std::to_string(bezier.mControlPoint[1].position.x),
-			std::to_string(bezier.mControlPoint[1].position.y),
-			std::to_string(bezier.mControlPoint[1].position.z) });
+		exportData.push_back({ "CONTROLPOINT1", std::to_string(bezier.mControlPoints[1].position.x),
+			std::to_string(bezier.mControlPoints[1].position.y),
+			std::to_string(bezier.mControlPoints[1].position.z) });
 
-		exportData.push_back({ "CONTROLPOINT2", std::to_string(bezier.mControlPoint[2].position.x),
-			std::to_string(bezier.mControlPoint[2].position.y),
-			std::to_string(bezier.mControlPoint[2].position.z) });
+		exportData.push_back({ "CONTROLPOINT2", std::to_string(bezier.mControlPoints[2].position.x),
+			std::to_string(bezier.mControlPoints[2].position.y),
+			std::to_string(bezier.mControlPoints[2].position.z) });
 
-		exportData.push_back({ "CONTROLPOINT3", std::to_string(bezier.mControlPoint[3].position.x),
-			std::to_string(bezier.mControlPoint[3].position.y),
-			std::to_string(bezier.mControlPoint[3].position.z) });
+		exportData.push_back({ "CONTROLPOINT3", std::to_string(bezier.mControlPoints[3].position.x),
+			std::to_string(bezier.mControlPoints[3].position.y),
+			std::to_string(bezier.mControlPoints[3].position.z) });
 	}
 
 	// 出力先パス設定
@@ -315,7 +322,7 @@ const void ParticleGUI::particleControl(ParticleEmitter* emitter)
 	ImGui::Begin("Type Parameter", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
 
 	// タイプ名取得
-	ParticleType::Type* type = Scene::GetGameObject<ParticleEmitter>()->GetType();
+	ParticleType::Base* type = Scene::GetGameObject<ParticleEmitter>()->GetType();
 	std::string name = type->GetTypeName().data();
 
 	// 現在のタイプ名を表示
@@ -366,7 +373,7 @@ const void ParticleGUI::typeControl(ParticleEmitter* emitter)
 
 const void ParticleGUI::bezierControl(ParticleEmitter* emitter)
 {
-	ParticleType::Type* type = emitter->GetType();
+	ParticleType::Base* type = emitter->GetType();
 	if (!type) {
 		return;
 	}
@@ -380,22 +387,22 @@ const void ParticleGUI::bezierControl(ParticleEmitter* emitter)
 	BezierCurve& bezier = b->GetBezier();
 
 	ImGui::SeparatorText("ControlPoint[0]");
-	ImGui::SliderFloat("[0].X", &bezier.mControlPoint[0].position.x, -50.0f, 50.0f, "%.2f");
-	ImGui::SliderFloat("[0].Y", &bezier.mControlPoint[0].position.y, -50.0f, 50.0f, "%.2f");
-	ImGui::SliderFloat("[0].Z", &bezier.mControlPoint[0].position.z, -50.0f, 50.0f, "%.2f");
+	ImGui::SliderFloat("[0].X", &bezier.mControlPoints[0].position.x, -50.0f, 50.0f, "%.2f");
+	ImGui::SliderFloat("[0].Y", &bezier.mControlPoints[0].position.y, -50.0f, 50.0f, "%.2f");
+	ImGui::SliderFloat("[0].Z", &bezier.mControlPoints[0].position.z, -50.0f, 50.0f, "%.2f");
 
 	ImGui::SeparatorText("ControlPoint[1]");
-	ImGui::SliderFloat("[1].X", &bezier.mControlPoint[1].position.x, -50.0f, 50.0f, "%.2f");
-	ImGui::SliderFloat("[1].Y", &bezier.mControlPoint[1].position.y, -50.0f, 50.0f, "%.2f");
-	ImGui::SliderFloat("[1].Z", &bezier.mControlPoint[1].position.z, -50.0f, 50.0f, "%.2f");
+	ImGui::SliderFloat("[1].X", &bezier.mControlPoints[1].position.x, -50.0f, 50.0f, "%.2f");
+	ImGui::SliderFloat("[1].Y", &bezier.mControlPoints[1].position.y, -50.0f, 50.0f, "%.2f");
+	ImGui::SliderFloat("[1].Z", &bezier.mControlPoints[1].position.z, -50.0f, 50.0f, "%.2f");
 
 	ImGui::SeparatorText("ControlPoint[2]");
-	ImGui::SliderFloat("[2].X", &bezier.mControlPoint[2].position.x, -50.0f, 50.0f, "%.2f");
-	ImGui::SliderFloat("[2].Y", &bezier.mControlPoint[2].position.y, -50.0f, 50.0f, "%.2f");
-	ImGui::SliderFloat("[2].Z", &bezier.mControlPoint[2].position.z, -50.0f, 50.0f, "%.2f");
+	ImGui::SliderFloat("[2].X", &bezier.mControlPoints[2].position.x, -50.0f, 50.0f, "%.2f");
+	ImGui::SliderFloat("[2].Y", &bezier.mControlPoints[2].position.y, -50.0f, 50.0f, "%.2f");
+	ImGui::SliderFloat("[2].Z", &bezier.mControlPoints[2].position.z, -50.0f, 50.0f, "%.2f");
 
 	ImGui::SeparatorText("ControlPoint[3]");
-	ImGui::SliderFloat("[3].X", &bezier.mControlPoint[3].position.x, -50.0f, 50.0f, "%.2f");
-	ImGui::SliderFloat("[3].Y", &bezier.mControlPoint[3].position.y, -50.0f, 50.0f, "%.2f");
-	ImGui::SliderFloat("[3].Z", &bezier.mControlPoint[3].position.z, -50.0f, 50.0f, "%.2f");
+	ImGui::SliderFloat("[3].X", &bezier.mControlPoints[3].position.x, -50.0f, 50.0f, "%.2f");
+	ImGui::SliderFloat("[3].Y", &bezier.mControlPoints[3].position.y, -50.0f, 50.0f, "%.2f");
+	ImGui::SliderFloat("[3].Z", &bezier.mControlPoints[3].position.z, -50.0f, 50.0f, "%.2f");
 }

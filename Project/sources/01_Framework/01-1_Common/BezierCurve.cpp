@@ -11,10 +11,10 @@
 BezierCurve::BezierCurve()
 {
 	// 制御点初期化
-	mControlPoint[0].position = { -15.0f, 3.0f, -15.0f };
-	mControlPoint[1].position = { -30.0f, 3.0f, -30.0f };
-	mControlPoint[2].position = { 30.0f, 3.0f, 30.0f };
-	mControlPoint[3].position = { 15.0f, 3.0f, 15.0f };
+	mControlPoints[0].position = { -15.0f, 3.0f, -15.0f };
+	mControlPoints[1].position = { -30.0f, 3.0f, -30.0f };
+	mControlPoints[2].position = { 30.0f, 3.0f, 30.0f };
+	mControlPoints[3].position = { 15.0f, 3.0f, 15.0f };
 
 	// フレーム0から開始
 	mFrame = 0;
@@ -49,21 +49,21 @@ void BezierCurve::CalcBezier()
 		double b3 = t * t * t;
 
 		// x座標算出
-		mBezierPoint[k].position.x = (static_cast<float>(b0) * mControlPoint[0].position.x + 
-			static_cast<float>(b1) * mControlPoint[1].position.x + 
-			static_cast<float>(b2) * mControlPoint[2].position.x + 
-			static_cast<float>(b3) * mControlPoint[3].position.x);
+		mBezierPoint[k].position.x = (static_cast<float>(b0) * mControlPoints[0].position.x + 
+			static_cast<float>(b1) * mControlPoints[1].position.x + 
+			static_cast<float>(b2) * mControlPoints[2].position.x + 
+			static_cast<float>(b3) * mControlPoints[3].position.x);
 
 		// y座標算出
-		mBezierPoint[k].position.y = (static_cast<float>(b0) * mControlPoint[0].position.y + 
-			static_cast<float>(b1) * mControlPoint[1].position.y + 
-			static_cast<float>(b2) * mControlPoint[2].position.y + 
-			static_cast<float>(b3) * mControlPoint[3].position.y);
+		mBezierPoint[k].position.y = (static_cast<float>(b0) * mControlPoints[0].position.y + 
+			static_cast<float>(b1) * mControlPoints[1].position.y + 
+			static_cast<float>(b2) * mControlPoints[2].position.y + 
+			static_cast<float>(b3) * mControlPoints[3].position.y);
 
 		// z座標算出
-		mBezierPoint[k].position.z = (static_cast<float>(b0) * mControlPoint[0].position.z + 
-			static_cast<float>(b1) * mControlPoint[1].position.z + 
-			static_cast<float>(b2) * mControlPoint[2].position.z + 
-			static_cast<float>(b3) * mControlPoint[3].position.z);
+		mBezierPoint[k].position.z = (static_cast<float>(b0) * mControlPoints[0].position.z + 
+			static_cast<float>(b1) * mControlPoints[1].position.z + 
+			static_cast<float>(b2) * mControlPoints[2].position.z + 
+			static_cast<float>(b3) * mControlPoints[3].position.z);
 	}
 }
