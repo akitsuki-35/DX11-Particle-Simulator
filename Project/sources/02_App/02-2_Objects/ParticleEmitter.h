@@ -67,9 +67,15 @@ public:
 	int GetLife() const { return  mDesc.Life; }
 
 	// セッター
+	void SetVelocity(const Vector3& velocity) { mDesc.Velocity = velocity; }
+	void SetSpreadRate(const Vector3& spreadRate) { mDesc.SpreadRate = spreadRate; }
+	void SetAccel(const Vector3& accel) { mDesc.Accel = accel; }
+	void SetScale(const float& scale) { mDesc.Scale = scale; }
+	void SetGravity(const float& gravity) { mDesc.Gravity = gravity; }
+	void SetDrag(const float& drag) { mDesc.Drag = drag; }
 	void SetLife(const int& life) { mDesc.Life = life; }
-	void SetInterval(const double& interval) { mMaxInterval = mCurrentInterval = interval; }
 	void SetCount(const int& count) { mCount = count; }
+	void SetInterval(const double& interval) { mMaxInterval = mCurrentInterval = interval; }
 	void SetType(std::unique_ptr<ParticleType::Base> type) { _mType = std::move(type); }
 
 	// CSVファイル読み込み

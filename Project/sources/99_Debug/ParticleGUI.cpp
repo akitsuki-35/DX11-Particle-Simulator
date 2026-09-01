@@ -75,7 +75,7 @@ const void ParticleGUI::parameterControl(ParticleEmitter* emitter)
 	ImGui::SeparatorText("Accel");
 	ImGui::SetNextItemWidth(275);
 	ImGui::SliderFloat3("##Accel", &emitter->mDesc.Accel.x, -50.0f, 50.0f, "%.3f");
-	
+
 	ImGui::SeparatorText("Value");
 	ImGui::SliderFloat("Scale", &emitter->mDesc.Scale, 1.0f, 5.0f, "%.3f");
 	ImGui::SliderFloat("Gravity", &emitter->mDesc.Gravity, 0.0f, 30.0f, "%.3f");
@@ -84,6 +84,7 @@ const void ParticleGUI::parameterControl(ParticleEmitter* emitter)
 	ImGui::SliderInt("Count", &emitter->mCount, 10, 100);
 	ImGui::SliderScalar("Interval", ImGuiDataType_Double, &emitter->mMaxInterval, &min, &max, "%.3f");
 
+	// パラメータのリセット
 	if (ImGui::Button("Parameter Reset", ImVec2(200, 20))) {
 		emitter->mDesc.Velocity = Vector3(0.0f, 10.0f, 0.0f);
 		emitter->mDesc.SpreadRate = Vector3(20.0f, 20.0f, 20.0f);
@@ -108,6 +109,7 @@ const void ParticleGUI::parameterControl(ParticleEmitter* emitter)
 	ImGui::ColorEdit3("##SubPicker", &renderer->mSubColor.x,
 		ImGuiColorEditFlags_PickerHueWheel | ImGuiColorEditFlags_NoAlpha | ImGuiColorEditFlags_Float);
 
+	// カラーのリセット
 	if (ImGui::Button("Color Reset", ImVec2(200, 20))) {
 		renderer->mColor = { 1.0f, 1.0f, 1.0f, 1.0f };
 		renderer->mSubColor = { 1.0f, 1.0f, 1.0f, 1.0f };
@@ -234,9 +236,25 @@ const bool ParticleGUI::exportCSV(ParticleEmitter* emitter, std::string fileName
 
 	// 共通パラメータ取得
 	exportData.push_back({ "TYPE", type->GetTypeName().data() });
+
+	exportData.push_back({ "VELOCITY", std::to_string(emitter->mDesc.Velocity.x),
+	std::to_string(emitter->mDesc.Velocity.y),
+	std::to_string(emitter->mDesc.Velocity.z) });
+
+	exportData.push_back({ "SPREADRATE", std::to_string(emitter->mDesc.SpreadRate.x),
+	std::to_string(emitter->mDesc.SpreadRate.y),
+	std::to_string(emitter->mDesc.SpreadRate.z) });
+
+	exportData.push_back({ "ACCEL", std::to_string(emitter->mDesc.Accel.x),
+	std::to_string(emitter->mDesc.Accel.y),
+	std::to_string(emitter->mDesc.Accel.z) });
+
+	exportData.push_back({ "SCALE", std::to_string(emitter->mDesc.Scale) });
+	exportData.push_back({ "GRAVITY", std::to_string(emitter->mDesc.Gravity) });
+	exportData.push_back({ "DRAG", std::to_string(emitter->mDesc.Drag) });
 	exportData.push_back({ "LIFE", std::to_string(emitter->mDesc.Life) });
-	exportData.push_back({ "INTERVAL", std::to_string(emitter->mMaxInterval) });
 	exportData.push_back({ "COUNT", std::to_string(emitter->mCount) });
+	exportData.push_back({ "INTERVAL", std::to_string(emitter->mMaxInterval) });
 
 	// メインカラー取得
 	DirectX::XMFLOAT4 mainColor = renderer->mColor;

@@ -9,6 +9,7 @@
 #pragma once
 
 #include "ParticleBase.h"
+#include "BezierCurve.h"
 
 namespace ParticleType {
 /*============================================================

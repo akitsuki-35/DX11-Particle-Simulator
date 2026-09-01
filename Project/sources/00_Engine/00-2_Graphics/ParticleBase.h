@@ -8,7 +8,6 @@
 *============================================================*/
 #pragma once
 
-#include "BezierCurve.h"
 #include <string>
 #include <string_view>
 #include <memory>
@@ -26,6 +25,8 @@ namespace ParticleType {
 *============================================================*/
 	class Base
 	{
+		friend ParticleEmitter;
+
 	protected:
 		ParticleEmitter* _mEmitter{};
 
