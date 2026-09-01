@@ -8,7 +8,6 @@
 *============================================================*/
 #pragma once
 
-#include "BezierCurve.h"
 #include <string>
 #include <string_view>
 #include <memory>
@@ -17,6 +16,7 @@
 	前方宣言
 ------------------------------------------------------------*/
 class ParticleEmitter;
+struct ParticleDesc;
 
 namespace ParticleType {
 /*============================================================
@@ -25,6 +25,8 @@ namespace ParticleType {
 *============================================================*/
 	class Base
 	{
+		friend ParticleEmitter;
+
 	protected:
 		ParticleEmitter* _mEmitter{};
 
@@ -33,7 +35,7 @@ namespace ParticleType {
 			:_mEmitter(emitter) {}
 		virtual ~Base() = default;
 
-		virtual void Emission() = 0;
+		virtual void Emission(ParticleDesc& desc) = 0;
 		virtual void Update(double deltaTime);
 
 		// CSVファイル読み込み・書き出し

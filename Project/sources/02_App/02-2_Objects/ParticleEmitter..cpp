@@ -43,7 +43,7 @@ void ParticleEmitter::Update(double deltaTime)
 	mCurrentInterval -= deltaTime;
 
 	if (mCurrentInterval <= 0.0) {
-		_mType->Emission();
+		_mType->Emission(mDesc);
 		mCurrentInterval = mMaxInterval;
 	}
 }

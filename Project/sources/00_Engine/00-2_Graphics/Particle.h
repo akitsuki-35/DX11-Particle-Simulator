@@ -10,10 +10,10 @@
 
 #include "Vector3.h"
 
-namespace ParticleType {
-	class Base;
-	class Box;
-}
+/*------------------------------------------------------------
+	前方宣言
+------------------------------------------------------------*/
+struct ParticleDesc;
 
 /*============================================================
 *	@class	: Particle
@@ -27,9 +27,11 @@ class Particle
 private:
 	Vector3 mPosition{ 0.0f, 0.0f, 0.0f };
 	Vector3 mScale{ 1.0f, 1.0f, 1.0f };
-	float mAlpha{ 1.0f };
 
 	Vector3 mVelocity{};
+	Vector3 mAccel{};
+	float mGravity{};
+	float mDrag{};
 
 	bool mEnable{ false };
 	int mLife{ 0 };
@@ -41,12 +43,9 @@ public:
 	void Update(double deltaTime);
 
 	// パラメータのセット
-	void SetParameter(const Vector3& position, const Vector3& velocity, const Vector3& scale, int life = 60) {
-		mPosition = position;
-		mVelocity = velocity;
-		mScale = scale;
-		mLife = life;
-	}
+	// positionには基本的にエミッタ本体の座標を指定する
+	void SetParameter(const Vector3& position, const Vector3& velocity, const Vector3& accel, const Vector3& scale,
+		const float& gravity,  const float& drag, const int& life);
 
 	// 有効・無効切り替え
 	void Enable() { mEnable = true; }

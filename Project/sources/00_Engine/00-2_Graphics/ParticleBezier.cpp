@@ -23,7 +23,7 @@ void ParticleType::Bezier::Update(double deltaTime)
 	Base::Update(deltaTime);
 }
 
-void ParticleType::Bezier::Emission()
+void ParticleType::Bezier::Emission(ParticleDesc& desc)
 {
 	int count = _mEmitter->GetCount();
 	auto& particles = _mEmitter->GetParticles();
@@ -43,12 +43,14 @@ void ParticleType::Bezier::Emission()
 	// パーティクル発射
 	for (int i = 0; i < _mEmitter->GetParticleMax(); i++) {
 		if (!particles[i].IsEnable()) {
-			Vector3 velocity = { ((float)rand() / RAND_MAX - 0.5f) * 20.0f,
-				((float)rand() / RAND_MAX) * 20.0f,
-				((float)rand() / RAND_MAX - 0.5f) * 20.0f };
-			float scale = ((float)rand() / RAND_MAX - 0.5f) * 5.0f;
+			Vector3 velocity = {
+				desc.Velocity.x + ((float)rand() / RAND_MAX - 0.5f) * desc.SpreadRate.x,
+				desc.Velocity.y + ((float)rand() / RAND_MAX - 0.5f) * desc.SpreadRate.y,
+				desc.Velocity.z + ((float)rand() / RAND_MAX - 0.5f) * desc.SpreadRate.x };
+			float scale = ((float)rand() / RAND_MAX - 0.5f) * desc.Scale;
 
-			particles[i].SetParameter(position, velocity, { scale, scale, scale }, _mEmitter->GetLife());
+			particles[i].SetParameter(position, velocity,
+				desc.Accel, { scale, scale, scale }, desc.Gravity, desc.Drag, desc.Life);
 			particles[i].Enable();
 
 			count--;
