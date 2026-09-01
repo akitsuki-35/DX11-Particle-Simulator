@@ -21,7 +21,7 @@ namespace ParticleType {
 		Box(ParticleEmitter* emitter)
 			: Base(emitter) {}
 
-		void Emission() override;
+		void Emission(ParticleDesc& desc) override;
 
 		std::string_view GetTypeName() const override { return "Box"; };
 	};

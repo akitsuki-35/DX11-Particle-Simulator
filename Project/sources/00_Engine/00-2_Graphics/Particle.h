@@ -29,7 +29,9 @@ private:
 	Vector3 mScale{ 1.0f, 1.0f, 1.0f };
 
 	Vector3 mVelocity{};
-	Vector3 mAccel;
+	Vector3 mAccel{};
+	float mGravity{};
+	float mDrag{};
 
 	bool mEnable{ false };
 	int mLife{ 0 };
@@ -41,10 +43,9 @@ public:
 	void Update(double deltaTime);
 
 	// パラメータのセット
-	// 直接指定とdesc経由での流し込みの2パターンに対応
 	// positionには基本的にエミッタ本体の座標を指定する
-	void SetParameter(const Vector3& position, const Vector3& velocity, const Vector3& accel, const Vector3& scale, int life = 60);
-	void SetParameter(const Vector3& position, const ParticleDesc& desc);
+	void SetParameter(const Vector3& position, const Vector3& velocity, const Vector3& accel, const Vector3& scale,
+		const float& gravity,  const float& drag, const int& life);
 
 	// 有効・無効切り替え
 	void Enable() { mEnable = true; }

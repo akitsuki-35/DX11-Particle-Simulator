@@ -13,11 +13,14 @@
 #include "ParticleBase.h"
 #include <memory>
 
-// パーティクル本体に流し込むデータ構造体
+// パーティクル本体の初期化に使用するデータ構造体
 struct ParticleDesc {
-	Vector3 Velocity{};
-	Vector3 Accel{};
-	Vector3 Scale{};
+	Vector3 Velocity{ 0.0f, 10.0f, 0.0f }; // 散布方向
+	Vector3 SpreadRate{ 20.0f, 20.0f, 20.0f }; // 散布率
+	Vector3 Accel{}; // 加速度
+	float Scale{ 5.0f }; // スケール倍率
+	float Gravity{ 9.8f }; // 重力
+	float Drag{ -1.0f }; // 抵抗
 	int Life{ 60 }; // 全体フレーム
 };
 

@@ -17,10 +17,10 @@ void Particle::Update(double deltaTime)
 		return;
 	}
 
-	Vector3 gravity{ 0.0f, -9.8f, 0.0f };
+	Vector3 gravity{ 0.0f, -mGravity, 0.0f };
 	mVelocity += mAccel * dt;
 	mVelocity += gravity * dt; // 重力
-	mVelocity += mVelocity * -1.0f * dt; // 抵抗
+	mVelocity += mVelocity * mDrag * dt; // 抵抗
 	mPosition += mVelocity * dt;
 
 	mLife--;
@@ -30,20 +30,13 @@ void Particle::Update(double deltaTime)
 	}
 }
 
-void Particle::SetParameter(const Vector3& position, const Vector3& velocity, const Vector3& accel, const Vector3& scale, int life)
+void Particle::SetParameter(const Vector3& position, const Vector3& velocity, const Vector3& accel, const Vector3& scale, const float& gravity, const float& drag, const int& life)
 {
 	mPosition = position;
 	mVelocity = velocity;
 	mAccel = accel;
 	mScale = scale;
+	mGravity = gravity;
+	mDrag = drag;
 	mLife = life;
-}
-
-void Particle::SetParameter(const Vector3& position, const ParticleDesc& desc)
-{
-	mPosition = position;
-	mVelocity = desc.Velocity;
-	mAccel = desc.Accel;
-	mScale = desc.Scale;
-	mLife = desc.Life;
 }
