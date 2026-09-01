@@ -58,12 +58,12 @@ const void ParticleGUI::parameterControl(ParticleEmitter* emitter)
 	// ウィンドウ位置固定
 	ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Always);
 	// ウィンドウサイズ固定
-	ImGui::SetNextWindowSize(ImVec2(300, 660), ImGuiCond_Always);
+	ImGui::SetNextWindowSize(ImVec2(300, 880), ImGuiCond_Always);
 
 	// 共通パラメータ操作
 	ImGui::Begin("Parameter", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
 	ImGui::SeparatorText("Value");
-	ImGui::SliderInt("Frame", &emitter->mLife, 30, 60);
+	ImGui::SliderInt("Frame", &emitter->mDesc.Life, 30, 60);
 	ImGui::SliderInt("Count", &emitter->mCount, 10, 100);
 	ImGui::SliderScalar("Interval", ImGuiDataType_Double, &emitter->mMaxInterval, &min, &max, "%.3f");
 
@@ -91,9 +91,9 @@ const void ParticleGUI::fileControl(ParticleEmitter* emitter)
 	}
 
 	// ウィンドウ位置固定
-	ImGui::SetNextWindowPos(ImVec2(0, 660), ImGuiCond_Always);
+	ImGui::SetNextWindowPos(ImVec2(0, 880), ImGuiCond_Always);
 	// ウィンドウサイズ固定
-	ImGui::SetNextWindowSize(ImVec2(300, 420), ImGuiCond_Always);
+	ImGui::SetNextWindowSize(ImVec2(300, 200), ImGuiCond_Always);
 
 	ImGui::Begin("File", nullptr, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize);
 
@@ -128,7 +128,6 @@ const void ParticleGUI::fileControl(ParticleEmitter* emitter)
 
 	// テクスチャ読み込み
 	ImGui::SeparatorText("Load Texture File");
-	ImGui::Image(reinterpret_cast<ImTextureID>(texture), ImVec2(150, 150));
 	loadTexture(emitter);
 
 	ImGui::End();
@@ -199,7 +198,7 @@ const bool ParticleGUI::exportCSV(ParticleEmitter* emitter, std::string fileName
 
 	// 共通パラメータ取得
 	exportData.push_back({ "TYPE", type->GetTypeName().data() });
-	exportData.push_back({ "LIFE", std::to_string(emitter->mLife) });
+	exportData.push_back({ "LIFE", std::to_string(emitter->mDesc.Life) });
 	exportData.push_back({ "INTERVAL", std::to_string(emitter->mMaxInterval) });
 	exportData.push_back({ "COUNT", std::to_string(emitter->mCount) });
 

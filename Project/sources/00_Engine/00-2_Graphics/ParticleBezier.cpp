@@ -48,7 +48,8 @@ void ParticleType::Bezier::Emission()
 				((float)rand() / RAND_MAX - 0.5f) * 20.0f };
 			float scale = ((float)rand() / RAND_MAX - 0.5f) * 5.0f;
 
-			particles[i].SetParameter(position, velocity, { scale, scale, scale }, _mEmitter->GetLife());
+			particles[i].SetParameter(position, velocity,
+				{ 0.0f, 0.0f, 0.0f }, { scale, scale, scale }, _mEmitter->GetLife());
 			particles[i].Enable();
 
 			count--;

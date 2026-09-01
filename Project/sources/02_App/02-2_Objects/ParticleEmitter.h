@@ -13,6 +13,14 @@
 #include "ParticleBase.h"
 #include <memory>
 
+// パーティクル本体に流し込むデータ構造体
+struct ParticleDesc {
+	Vector3 Velocity{};
+	Vector3 Accel{};
+	Vector3 Scale{};
+	int Life{ 60 }; // 全体フレーム
+};
+
 /*============================================================
 *	@class	: ParticleEmitter
 *	@brief	: パーティクルエミッタ
@@ -26,8 +34,8 @@ private:
 	static constexpr int PARTICLE_MAX{ 10000 };
 	std::vector<Particle> mParticles{};
 
-	// 全体フレーム
-	int mLife{ 60 };
+	// データ構造体
+	ParticleDesc mDesc{};
 
 	// 発射インターバル
 	double mMaxInterval{ 0.1 };
@@ -36,6 +44,7 @@ private:
 	// 一度あたりの発射数
 	int mCount{ 100 };
 
+	// パーティクルタイプ
 	std::unique_ptr<ParticleType::Base> _mType{};
 
 public:	
@@ -51,10 +60,11 @@ public:
 	int GetParticleMax() const { return PARTICLE_MAX; }
 	std::vector<Particle>& GetParticles() { return mParticles; }
 	int GetCount() const { return mCount; }
-	int GetLife() const { return mLife; }
+	ParticleDesc GetDesc() const { return mDesc; }
+	int GetLife() const { return  mDesc.Life; }
 
 	// セッター
-	void SetLife(const int& life) { mLife = life; }
+	void SetLife(const int& life) { mDesc.Life = life; }
 	void SetInterval(const double& interval) { mMaxInterval = mCurrentInterval = interval; }
 	void SetCount(const int& count) { mCount = count; }
 	void SetType(std::unique_ptr<ParticleType::Base> type) { _mType = std::move(type); }
