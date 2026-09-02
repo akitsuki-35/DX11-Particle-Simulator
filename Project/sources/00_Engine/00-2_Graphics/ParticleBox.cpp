@@ -22,7 +22,7 @@ void ParticleType::Box::Emission(ParticleDesc& desc)
 			Vector3 velocity = { 
 				desc.Velocity.x + ((float)rand() / RAND_MAX - 0.5f) * desc.SpreadRate.x,
 				desc.Velocity.y + ((float)rand() / RAND_MAX - 0.5f) * desc.SpreadRate.y,
-				desc.Velocity.z + ((float)rand() / RAND_MAX - 0.5f) * desc.SpreadRate.x };
+				desc.Velocity.z + ((float)rand() / RAND_MAX - 0.5f) * desc.SpreadRate.z };
 			float scale = ((float)rand() / RAND_MAX - 0.5f) * desc.Scale;
 
 			particles[i].SetParameter(position, velocity,
