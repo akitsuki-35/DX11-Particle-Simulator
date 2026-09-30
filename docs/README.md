@@ -5,6 +5,7 @@ DirectX11 DirectX11によるパーティクルシミュレーター<br>
 
 - 三次ベジエ曲線上のパーティクル描画に対応
 - ImGuiによる値の制御に対応
+- csvファイル入出力に対応
 
 ## ImGui Parameters
 |Type|Name|Usage|

@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/12
-*	@updated : 2026/08/12
+*	@updated : 2026/09/30
 *============================================================*/
 #include "TextRenderer.h"
 #include "Texture.h"
@@ -123,7 +123,7 @@ void TextRenderer::Draw() const
 		}
 
 		// フォントリソース取得
-		Glyph* glyph = FontManager::getInstance().GetGlyph(_mFont, codepoint);
+		GLYPH* glyph = FontManager::getInstance().GetGlyph(_mFont, codepoint);
 		if (!glyph) {
 			continue;
 		}
@@ -166,7 +166,7 @@ void TextRenderer::Draw() const
 	Renderer::End();
 }
 
-void TextRenderer::shadowDraw(const Glyph* glyph, const Transform& transform) const
+void TextRenderer::shadowDraw(const GLYPH* glyph, const Transform& transform) const
 {
 	// シャドウ用マテリアル設定
 	Element::MATERIAL shadowMaterial{};

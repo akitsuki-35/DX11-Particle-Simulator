@@ -23,35 +23,35 @@ class Animation final
 
 public:
     // 移動キー
-    struct KeyPosition
+    struct KEY_POSITION
     {
         Vector3 Position{};
         double Time{};
     };
 
     // 回転キー
-    struct KeyRotation
+    struct KEY_ROTATION
     {
         Quaternion Rotation{};
         double Time{};
     };
 
     // 拡大縮小キー
-    struct KeyScale
+    struct KEY_SCALE
     {
         Vector3 Scale{};
         double Time{};
     };
 
     // アニメーションチャンネル
-    struct Channel
+    struct CHANNEL
     {
         // ボーン番号
         int BoneIndex{ -1 };
 
-        std::vector<KeyPosition> Positions{};
-        std::vector<KeyRotation> Rotations{};
-        std::vector<KeyScale> Scales{};
+        std::vector<KEY_POSITION> Positions{};
+        std::vector<KEY_ROTATION> Rotations{};
+        std::vector<KEY_SCALE> Scales{};
     };
 
 private:
@@ -59,13 +59,13 @@ private:
     double mTicksPerSecond{}; // 1秒あたりのTick数
 
     // チャンネル
-    std::vector<Channel> mChannels{};
+    std::vector<CHANNEL> mChannels{};
 
 public:
-    void AddChannel(const Channel& channel);
+    void AddChannel(const CHANNEL& channel);
     
     // ゲッター
     double GetDuration() const { return mDuration; }
     double GetTicksPerSecond() const { return mTicksPerSecond; }
-    const std::vector<Channel>& GetChannels() const { return mChannels; }
+    const std::vector<CHANNEL>& GetChannels() const { return mChannels; }
 };

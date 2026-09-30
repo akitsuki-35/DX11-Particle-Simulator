@@ -82,12 +82,6 @@
     <Filter Include="00_Engine\00-2_Graphics\UI">
       <UniqueIdentifier>{30ec2ba0-824a-4adb-8f03-8211996e7d09}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Framework\01-2_Components\Animator">
-      <UniqueIdentifier>{e21d15bc-902a-403d-8029-e3649ed7ea19}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Framework\01-2_Components\AudioPlayer">
-      <UniqueIdentifier>{6c19db79-72c0-470a-baa7-27501eb658b8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02_App\02-2_Objects\Game">
       <UniqueIdentifier>{efe4ddf4-de7c-4fe1-93b9-b940a76d159a}</UniqueIdentifier>
     </Filter>
@@ -96,6 +90,12 @@
     </Filter>
     <Filter Include="00_Engine\00-2_Graphics\Effects">
       <UniqueIdentifier>{acdab742-2005-44cb-bb82-f8cea4659a79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Framework\01-2_Components\Audio">
+      <UniqueIdentifier>{ea751968-bded-4aab-9dd8-35f63484f897}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Framework\01-2_Components\Animator">
+      <UniqueIdentifier>{8e26e8d9-0ee5-4f1c-9048-90954572e8cc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -207,9 +207,6 @@
     <ClCompile Include="sources\00_Engine\00-2_Graphics\UICanvas.cpp">
       <Filter>00_Engine\00-2_Graphics\UI</Filter>
     </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-2_Components\TextRenderer.cpp">
-      <Filter>01_Framework\01-2_Components\Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="sources\00_Engine\00-3_Resource\AnimationManager.cpp">
       <Filter>00_Engine\00-3_Resource\Animation</Filter>
     </ClCompile>
@@ -220,9 +217,6 @@
       <Filter>00_Engine\00-3_Resource\Model</Filter>
     </ClCompile>
     <ClCompile Include="sources\01_Framework\01-2_Components\SpriteRenderer.cpp">
-      <Filter>01_Framework\01-2_Components\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-2_Components\UIRenderer.cpp">
       <Filter>01_Framework\01-2_Components\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="sources\01_Framework\01-2_Components\BillboardRenderer.cpp">
@@ -242,12 +236,6 @@
     </ClCompile>
     <ClCompile Include="sources\01_Framework\01-1_Common\Transition.cpp">
       <Filter>01_Framework\01-1_Common</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-2_Components\Animator.cpp">
-      <Filter>01_Framework\01-2_Components\Animator</Filter>
-    </ClCompile>
-    <ClCompile Include="sources\01_Framework\01-2_Components\AudioPlayer.cpp">
-      <Filter>01_Framework\01-2_Components\AudioPlayer</Filter>
     </ClCompile>
     <ClCompile Include="sources\00_Engine\00-2_Graphics\Particle.cpp">
       <Filter>00_Engine\00-2_Graphics\Effects</Filter>
@@ -294,6 +282,18 @@
     <ClCompile Include="sources\00_Engine\00-2_Graphics\ParticleBox.cpp">
       <Filter>00_Engine\00-2_Graphics\Effects</Filter>
     </ClCompile>
+    <ClCompile Include="sources\01_Framework\01-2_Components\TextRenderer.cpp">
+      <Filter>01_Framework\01-2_Components\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\01_Framework\01-2_Components\UIRenderer.cpp">
+      <Filter>01_Framework\01-2_Components\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\01_Framework\01-2_Components\AudioPlayer.cpp">
+      <Filter>01_Framework\01-2_Components\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\01_Framework\01-2_Components\Animator.cpp">
+      <Filter>01_Framework\01-2_Components\Animator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sources\00_Engine\00-1_Core\Application.h">
@@ -304,12 +304,6 @@
     </ClInclude>
     <ClInclude Include="sources\00_Engine\00-1_Core\SystemWindow.h">
       <Filter>00_Engine\00-1_Core</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\00_Engine\00-1_Core\Docs.h">
-      <Filter>00_Engine\00-1_Core</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-1_Common\Collision3D.h">
-      <Filter>01_Framework\01-1_Common</Filter>
     </ClInclude>
     <ClInclude Include="sources\01_Framework\01-1_Common\Input.h">
       <Filter>01_Framework\01-1_Common</Filter>
@@ -461,29 +455,17 @@
     <ClInclude Include="sources\00_Engine\00-3_Resource\FontManager.h">
       <Filter>00_Engine\00-3_Resource\Font</Filter>
     </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\UIRenderer.h">
-      <Filter>01_Framework\01-2_Components\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="sources\00_Engine\00-2_Graphics\UICanvas.h">
       <Filter>00_Engine\00-2_Graphics\UI</Filter>
     </ClInclude>
     <ClInclude Include="sources\00_Engine\00-2_Graphics\UIStyle.h">
       <Filter>00_Engine\00-2_Graphics\UI</Filter>
     </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\TextRenderer.h">
-      <Filter>01_Framework\01-2_Components\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="sources\01_Framework\01-1_Common\Easing.h">
       <Filter>01_Framework\01-1_Common</Filter>
     </ClInclude>
     <ClInclude Include="sources\01_Framework\01-1_Common\Transition.h">
       <Filter>01_Framework\01-1_Common</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\Animator.h">
-      <Filter>01_Framework\01-2_Components\Animator</Filter>
-    </ClInclude>
-    <ClInclude Include="sources\01_Framework\01-2_Components\AudioPlayer.h">
-      <Filter>01_Framework\01-2_Components\AudioPlayer</Filter>
     </ClInclude>
     <ClInclude Include="sources\02_App\02-2_Objects\GameObject.h">
       <Filter>02_App\02-2_Objects\Common</Filter>
@@ -532,6 +514,18 @@
     </ClInclude>
     <ClInclude Include="sources\00_Engine\00-2_Graphics\ParticleBox.h">
       <Filter>00_Engine\00-2_Graphics\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\01_Framework\01-2_Components\TextRenderer.h">
+      <Filter>01_Framework\01-2_Components\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\01_Framework\01-2_Components\UIRenderer.h">
+      <Filter>01_Framework\01-2_Components\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\01_Framework\01-2_Components\AudioPlayer.h">
+      <Filter>01_Framework\01-2_Components\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="sources\01_Framework\01-2_Components\Animator.h">
+      <Filter>01_Framework\01-2_Components\Animator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
