@@ -14,7 +14,7 @@
 #include <memory>
 
 // パーティクル本体の初期化に使用するデータ構造体
-struct ParticleDesc {
+struct PARTICLE_DESC {
 	Vector3 Velocity{ 0.0f, 10.0f, 0.0f }; // 散布方向
 	Vector3 SpreadRate{ 20.0f, 20.0f, 20.0f }; // 散布率
 	Vector3 Accel{}; // 加速度
@@ -38,7 +38,7 @@ private:
 	std::vector<Particle> mParticles{};
 
 	// データ構造体
-	ParticleDesc mDesc{};
+	PARTICLE_DESC mDesc{};
 
 	// 発射インターバル
 	double mMaxInterval{ 0.1 };
@@ -63,7 +63,7 @@ public:
 	int GetParticleMax() const { return PARTICLE_MAX; }
 	std::vector<Particle>& GetParticles() { return mParticles; }
 	int GetCount() const { return mCount; }
-	ParticleDesc GetDesc() const { return mDesc; }
+	PARTICLE_DESC GetDesc() const { return mDesc; }
 	int GetLife() const { return  mDesc.Life; }
 
 	// セッター

@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/09
-*	@updated : 2026/08/19
+*	@updated : 2026/09/30
 *============================================================*/
 #pragma once
 
@@ -23,7 +23,7 @@ class BezierCurve
 
 private:
 	struct POINT {
-		Vector3 position{};
+		Vector3 Position{};
 	};
 
 	// 指定可能な最大フレーム(初期化・参照用)
@@ -47,15 +47,15 @@ public:
 	int GetFrame() const { return mFrame; }
 
 	// 制御点座標取得
-	Vector3& GetControlPoint(int index) { return mControlPoints[index].position; }
+	Vector3& GetControlPoint(int index) { return mControlPoints[index].Position; }
 
 	// フレーム指定でベジエ曲線上座標取得
-	Vector3& GetBezierPoint(int index) { return mBezierPoint[index].position; }
+	Vector3& GetBezierPoint(int index) { return mBezierPoint[index].Position; }
 
 	// 制御点座標更新
 	void SetControlPoint(int index, Vector3 position) {
 		if (index > 4) return;
-		mControlPoints[index].position = position;
+		mControlPoints[index].Position = position;
 	}
 
 	// 最大フレーム変更

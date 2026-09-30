@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/07
-*	@updated : 2026/08/07
+*	@updated : 2026/09/30
 *============================================================*/
 #pragma once
 
@@ -21,7 +21,7 @@ class Skeleton final
 {
 public:
     // ボーン構造体
-    struct Bone
+    struct BONE
     {
         std::string Name{}; // ボーン名
         int ParentIndex{ -1 }; // 親ボーン
@@ -36,13 +36,13 @@ public:
 
 private:
     std::unordered_map<std::string, int> mBoneMap{};
-    std::vector<Bone> mBones{};
+    std::vector<BONE> mBones{};
 
     std::vector<DirectX::XMFLOAT4X4>mSkinningMatrices{};
     DirectX::XMFLOAT4X4 mGlobalInverse{};
 
 public:
-    int AddBone(const Bone& bone);
+    int AddBone(const BONE& bone);
 
     // ボーン取得
     int FindBone(const std::string& name) const;
@@ -56,7 +56,7 @@ public:
 
     // ゲッター
     int GetBoneIndex(const std::string& name);
-    Bone& GetBone(size_t index) { return mBones[index]; }
+    BONE& GetBone(size_t index) { return mBones[index]; }
     size_t GetBoneCount() const { return mBones.size(); }
     const std::vector<DirectX::XMFLOAT4X4>& GetSkinningMatrices() const { return mSkinningMatrices; }
 

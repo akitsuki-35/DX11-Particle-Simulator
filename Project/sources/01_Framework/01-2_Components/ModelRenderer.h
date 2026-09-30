@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/31
-*	@updated : 2026/07/31
+*	@updated : 2026/09/30
 *============================================================*/
 #pragma once
 
@@ -25,7 +25,7 @@ class Texture;
 class ModelRenderer : public Renderer
 {
 	// テクスチャ
-	struct ModelTextures
+	struct MODEL_TEXTURES
 	{
 		Texture* Albedo{};
 		Texture* Normal{};
@@ -47,7 +47,7 @@ public:
 
 private:
 	Model* _mModel{};
-	ModelTextures mTextures{};
+	MODEL_TEXTURES mTextures{};
 	
 	// ディレクトリ(テクスチャ検索用)
 	std::filesystem::path mDirectory{};

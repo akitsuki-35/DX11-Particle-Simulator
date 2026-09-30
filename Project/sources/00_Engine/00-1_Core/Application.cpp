@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/07/07
-*	@updated : 2026/07/13
+*	@updated : 2026/09/30
 *============================================================*/
 #include "Application.h"
 #include "SystemWindow.h"

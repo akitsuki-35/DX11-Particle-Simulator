@@ -17,13 +17,13 @@
 	前方宣言
 ------------------------------------------------------------*/
 class Texture;
-struct Font;
+struct FONT;
 struct IDWriteFactory;
 
 /*------------------------------------------------------------
 	文字テクスチャデータ
 ------------------------------------------------------------*/
-struct Glyph
+struct GLYPH
 {
 	std::shared_ptr<Texture> Texture{ nullptr };
 
@@ -64,10 +64,10 @@ private:
 ----------------------------------------------------*/
 private:
 	// フォントコンテナ
-	std::unordered_map<std::string, std::unique_ptr<Font>> mFonts{};
+	std::unordered_map<std::string, std::unique_ptr<FONT>> mFonts{};
 
 	// Glyphキャッシュ
-	std::unordered_map<Font*, std::unordered_map<uint32_t, std::unique_ptr<Glyph>>> mAtlas{};
+	std::unordered_map<FONT*, std::unordered_map<uint32_t, std::unique_ptr<GLYPH>>> mAtlas{};
 
 	// DirectWriteファクトリ
 	Microsoft::WRL::ComPtr<IDWriteFactory> _mFactory{ nullptr };
@@ -77,20 +77,20 @@ public:
 	void Initialize(IDWriteFactory* factory) { _mFactory = factory; }
 
 	// フォント取得
-	Font* GetFont(const std::string& keyName);
+	FONT* GetFont(const std::string& keyName);
 	
 	// 文字テクスチャ取得
-	Glyph* GetGlyph(Font* font, uint32_t codePoint);
+	GLYPH* GetGlyph(FONT* font, uint32_t codePoint);
 
 	// フォント登録
-	Font* Register(const std::string& keyName, const char* fontPath);
+	FONT* Register(const std::string& keyName, const char* fontPath);
 
 	// クリア
 	void Clear();
 
 private:
 	// 文字テクスチャ生成
-	bool generateGlyph(Glyph& glyph, Font* font, uint32_t codepPoint);
+	bool generateGlyph(GLYPH& glyph, FONT* font, uint32_t codepPoint);
 };
 
 namespace FontSet {

@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/12
-*	@updated : 2026/08/12
+*	@updated : 2026/09/30
 *============================================================*/
 #pragma once
 
@@ -15,8 +15,8 @@
 ------------------------------------------------------------*/
 class Texture;
 class Transform;
-struct Font;
-struct Glyph;
+struct FONT;
+struct GLYPH;
 
 /*============================================================
 *	@class	: UIRenderer
@@ -25,7 +25,7 @@ struct Glyph;
 class TextRenderer : public UIRenderer
 {
 private:
-	Font* _mFont{}; // フォント
+	FONT* _mFont{}; // フォント
 	std::wstring mText{}; // 表示文字列
 	size_t mCharsPerLine{ 30 }; // 1行あたりの文字数
 
@@ -45,7 +45,7 @@ public:
 
 private:
 	// ドロップシャドウ描画
-	void shadowDraw(const Glyph* glyph, const Transform& transform) const;
+	void shadowDraw(const GLYPH* glyph, const Transform& transform) const;
 
 	DirectX::XMFLOAT4 convertTextColor(int index) const;
 

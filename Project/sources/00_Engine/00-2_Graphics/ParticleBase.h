@@ -4,7 +4,7 @@
 *
 * 　@author  : @akitsuki-35（https://github.com/akitsuki-35）
 * 　@date	 : 2026/08/19
-*	@updated : 2026/08/27
+*	@updated : 2026/09/30
 *============================================================*/
 #pragma once
 
@@ -16,7 +16,7 @@
 	前方宣言
 ------------------------------------------------------------*/
 class ParticleEmitter;
-struct ParticleDesc;
+struct PARTICLE_DESC;
 
 namespace ParticleType {
 /*============================================================
@@ -35,7 +35,7 @@ namespace ParticleType {
 			:_mEmitter(emitter) {}
 		virtual ~Base() = default;
 
-		virtual void Emission(ParticleDesc& desc) = 0;
+		virtual void Emission(PARTICLE_DESC& desc) = 0;
 		virtual void Update(double deltaTime);
 
 		// CSVファイル読み込み・書き出し

@@ -70,7 +70,7 @@ const void ParticleGUI::parameterControl(ParticleEmitter* emitter)
 
 	ImGui::SeparatorText("SpreadRate");
 	ImGui::SetNextItemWidth(275);
-	ImGui::SliderFloat3("##SpreadRate", &emitter->mDesc.SpreadRate.x, 20.0f, 50.0f, "%.3f");
+	ImGui::SliderFloat3("##SpreadRate", &emitter->mDesc.SpreadRate.x, 20.0f, 100.0f, "%.3f");
 
 	ImGui::SeparatorText("Accel");
 	ImGui::SetNextItemWidth(275);
@@ -79,7 +79,7 @@ const void ParticleGUI::parameterControl(ParticleEmitter* emitter)
 	ImGui::SeparatorText("Value");
 	ImGui::SliderFloat("Scale", &emitter->mDesc.Scale, 1.0f, 5.0f, "%.3f");
 	ImGui::SliderFloat("Gravity", &emitter->mDesc.Gravity, 0.0f, 30.0f, "%.3f");
-	ImGui::SliderFloat("Drag", &emitter->mDesc.Drag, -1.0f, 0.0f, "%.3f");
+	ImGui::SliderFloat("Drag", &emitter->mDesc.Drag, -1.0f, 5.0f, "%.3f");
 	ImGui::SliderInt("Frame", &emitter->mDesc.Life, 30, 60);
 	ImGui::SliderInt("Count", &emitter->mCount, 10, 100);
 	ImGui::SliderScalar("Interval", ImGuiDataType_Double, &emitter->mMaxInterval, &min, &max, "%.3f");
@@ -272,21 +272,21 @@ const bool ParticleGUI::exportCSV(ParticleEmitter* emitter, std::string fileName
 	}
 	if (type->GetTypeName() == "Bezier") {
 		BezierCurve& bezier = dynamic_cast<ParticleType::Bezier*>(type)->GetBezier();
-		exportData.push_back({ "CONTROLPOINT0", std::to_string(bezier.mControlPoints[0].position.x), 
-			std::to_string(bezier.mControlPoints[0].position.y),
-			std::to_string(bezier.mControlPoints[0].position.z) });
+		exportData.push_back({ "CONTROLPOINT0", std::to_string(bezier.mControlPoints[0].Position.x), 
+			std::to_string(bezier.mControlPoints[0].Position.y),
+			std::to_string(bezier.mControlPoints[0].Position.z) });
 
-		exportData.push_back({ "CONTROLPOINT1", std::to_string(bezier.mControlPoints[1].position.x),
-			std::to_string(bezier.mControlPoints[1].position.y),
-			std::to_string(bezier.mControlPoints[1].position.z) });
+		exportData.push_back({ "CONTROLPOINT1", std::to_string(bezier.mControlPoints[1].Position.x),
+			std::to_string(bezier.mControlPoints[1].Position.y),
+			std::to_string(bezier.mControlPoints[1].Position.z) });
 
-		exportData.push_back({ "CONTROLPOINT2", std::to_string(bezier.mControlPoints[2].position.x),
-			std::to_string(bezier.mControlPoints[2].position.y),
-			std::to_string(bezier.mControlPoints[2].position.z) });
+		exportData.push_back({ "CONTROLPOINT2", std::to_string(bezier.mControlPoints[2].Position.x),
+			std::to_string(bezier.mControlPoints[2].Position.y),
+			std::to_string(bezier.mControlPoints[2].Position.z) });
 
-		exportData.push_back({ "CONTROLPOINT3", std::to_string(bezier.mControlPoints[3].position.x),
-			std::to_string(bezier.mControlPoints[3].position.y),
-			std::to_string(bezier.mControlPoints[3].position.z) });
+		exportData.push_back({ "CONTROLPOINT3", std::to_string(bezier.mControlPoints[3].Position.x),
+			std::to_string(bezier.mControlPoints[3].Position.y),
+			std::to_string(bezier.mControlPoints[3].Position.z) });
 	}
 
 	// 出力先パス設定
@@ -441,17 +441,17 @@ const void ParticleGUI::bezierControl(ParticleEmitter* emitter)
 
 	ImGui::SeparatorText("ControlPoint[0]");
 	ImGui::SetNextItemWidth(275);
-	ImGui::SliderFloat3("##[0]", &bezier.mControlPoints[0].position.x, -50.0f, 50.0f, "%.3f");
+	ImGui::SliderFloat3("##[0]", &bezier.mControlPoints[0].Position.x, -50.0f, 50.0f, "%.3f");
 
 	ImGui::SeparatorText("ControlPoint[1]");
 	ImGui::SetNextItemWidth(275);
-	ImGui::SliderFloat3("##[1]", &bezier.mControlPoints[1].position.x, -50.0f, 50.0f, "%.3f");
+	ImGui::SliderFloat3("##[1]", &bezier.mControlPoints[1].Position.x, -50.0f, 50.0f, "%.3f");
 
 	ImGui::SeparatorText("ControlPoint[2]");
 	ImGui::SetNextItemWidth(275);
-	ImGui::SliderFloat3("##[2]", &bezier.mControlPoints[2].position.x, -50.0f, 50.0f, "%.3f");
+	ImGui::SliderFloat3("##[2]", &bezier.mControlPoints[2].Position.x, -50.0f, 50.0f, "%.3f");
 
 	ImGui::SeparatorText("ControlPoint[3]");
 	ImGui::SetNextItemWidth(275);
-	ImGui::SliderFloat3("##[3]", &bezier.mControlPoints[3].position.x, -50.0f, 50.0f, "%.3f");
+	ImGui::SliderFloat3("##[3]", &bezier.mControlPoints[3].Position.x, -50.0f, 50.0f, "%.3f");
 }
